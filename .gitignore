@@ -20,3 +20,4 @@ pavucontrol.ini
 user-dirs.dirs
 user-dirs.locale
 gentoo
+dconf
