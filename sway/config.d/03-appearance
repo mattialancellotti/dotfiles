@@ -6,4 +6,5 @@ gaps inner 5
 
 ### Title, borders and colors
 default_border pixel 1
-client.focused #FFFFFF #FFFFFF #FFFFFF #FFFFFF
+client.focused   #FFFFFF #FFFFFF #FFFFFF #FFFFFF
+client.unfocused #808080 #808080 #FFFFFF #808080
