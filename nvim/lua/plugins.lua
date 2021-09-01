@@ -14,6 +14,7 @@ return require('packer').startup({function()
     use 'Mofiqul/dracula.nvim'
     use 'glepnir/zephyr-nvim'
     use 'whatyouhide/vim-gotham'
+    use 'arcticicestudio/nord-vim'
 
     -- Telescope and its requirments
     use {

@@ -89,6 +89,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/iceberg.vim"
   },
+  ["nord-vim"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nord-vim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/packer.nvim"
