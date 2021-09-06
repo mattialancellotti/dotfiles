@@ -10,7 +10,7 @@ local config = {}
 local function map(mode, lhs, rhs, opts)
    -- Configuring the options for every single mapping
    local options = { noremap = true }
-   if opts then options = vim.tbl_extend('force', options, opts) end
+   if opts then options = vim.tbl_extend('force', options, opts or {}) end
 
    -- Adding the keymap
    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
