@@ -1,23 +1,41 @@
 -- init.lua
 
--- Neovim variables
+-- The thing about lua is that it has tables.. global tables and local tables.
+-- Unfortunately global tables (accessed by vim.api in vim) are slower that
+-- local tables. To gain speed (and speed means 30% faster response time) global
+-- stuff should be referenced by local stuff.
+-- For this specific reason the following variables have been assigned to local
+-- copies. Also no need to write 'vim.'.
 local g = vim.g
 local api = vim.api --  To access Vim's lua api
 local cmd = vim.cmd --  To execute Vim commands
 local opt = vim.opt --  To set options
 local fun = vim.fn  --  To call Vim functions
 
---  Setting options
---  TODO need to compact those
-opt.termguicolors  = true
-opt.number         = true
-opt.relativenumber = true
+-- Different terminals might have different support for colors.
+-- Recently I have been using 24-bit enabled terminals like Alacritty and
+-- tmux, but I've also tried non-24-bit enabled terminals like GNU Screen and
+-- Unicode-rxvt.
+--
+-- On Alacritty this works both on pure terminal and in tmux.
+-- For more on this type ':h term.txt'.
+local env = vim.env
+if env.COLORTERM == "truecolor" then
+   -- This enables true colors
+   opt.termguicolors = true
+end
+
+-- Saving changes automatically when executing things like ':make'
+opt.autowrite = true
+
+opt.number = true
+opt.hlsearch = true
 opt.hlsearch = true
 opt.ruler    = true
 opt.confirm  = true
 opt.textwidth = 80
 opt.laststatus = 2
-opt.shiftwidth  = 4
+opt.shiftwidth  = 5
 opt.softtabstop = 4
 opt.expandtab   = true
 opt.backup      = false
