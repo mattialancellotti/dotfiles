@@ -1,6 +1,6 @@
 -- plugins.lua
 
-vim.cmd('packadd packer.nvim')
+--vim.cmd('packadd packer.nvim')
 
 return require('packer').startup({function()
    -- Packer to manage itself

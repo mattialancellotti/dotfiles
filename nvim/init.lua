@@ -6,11 +6,8 @@
 -- stuff should be referenced by local stuff.
 -- For this specific reason the following variables have been assigned to local
 -- copies. Also no need to write 'vim.'.
-local g = vim.g
-local api = vim.api --  To access Vim's lua api
 local cmd = vim.cmd --  To execute Vim commands
 local opt = vim.opt --  To set options
-local fun = vim.fn  --  To call Vim functions
 
 -- Different terminals might have different support for colors.
 -- Recently I have been using 24-bit enabled terminals like Alacritty and
@@ -29,6 +26,7 @@ end
 opt.autowrite = true
 
 opt.number = true
+opt.relativenumber = true
 opt.hlsearch = true
 opt.hlsearch = true
 opt.ruler    = true

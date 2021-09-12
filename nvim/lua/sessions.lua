@@ -8,7 +8,8 @@ local sessions_path = string.format('%s%s', vim.env.HOME, '/.local/share/nvim/se
 
 -- Printing functions
 local del_print = vim.api.nvim_del_current_line
-local print_err = vim.api.nvim_err_writeln
+local echo = vim.api.nvim_out_write
+local err = vim.api.nvim_err_writeln
 
 -- Creates a session based on the user's input for a file name.
 M.create_session = (function ()
@@ -26,7 +27,7 @@ M.create_session = (function ()
    end
 
    -- Printing an error message
-   print_err('File already exists')
+   err('File already exists')
    io.close(file)
    return false
 end)
