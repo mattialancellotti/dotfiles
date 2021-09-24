@@ -15,31 +15,33 @@ evnt_set("file-loaded", (function(event)
 
    if name:match(".+(.png)") or name:match(".+(.jpg)") then
       prop_set("pause", "yes")
+
+      -- Initiating the veiwer
+      -- Mapping hl to move through the playlist using `playlist-next and
+      -- playlist-prev`
+      bind_key('l', (function() mp.command("playlist-next") end))
+      bind_key('h', (function() mp.command("playlist-prev") end))
+
+
+      -- Configuring mpv with some image-viewer related functions like:
+      --    + Zooming-in using '+';
+      --    + Zooming-out using '-';
+      --    + Deafult zoom value using '='.
+      bind_key('+', (function()
+         -- Getting the current zoom value
+         local zvalue = prop_get("video-zoom")
+
+         -- Actually zooming in the picture
+         prop_set("video-zoom", (zvalue + 0.1));
+      end))
+      bind_key('-', (function()
+         -- Getting the current zoom value
+         local zvalue = prop_get("video-zoom")
+
+         -- Actually zooming out of picture
+         prop_set("video-zoom", (zvalue - 0.1));
+      end))
+      bind_key('=', (function() prop_set("video-zoom", "0") end))
    end
 end))
 
--- Mapping hl to move through the playlist using `playlist-next and
--- playlist-prev`
-bind_key('l', (function() mp.command("playlist-next") end))
-bind_key('h', (function() mp.command("playlist-prev") end))
-
-local function zoomin()
-   -- Getting the current zoom value
-   local zvalue = prop_get("video-zoom")
-
-   -- Actually zooming in the picture
-   prop_set("video-zoom", (zvalue + 0.1));
-end
-
-local function zoomout()
-   -- Getting the current zoom value
-   local zvalue = prop_get("video-zoom")
-
-   -- Actually zooming out of picture
-   prop_set("video-zoom", (zvalue - 0.1));
-end
-
--- Common mapping like zoom in or zoom out (a bit more simple)
-bind_key('+', zoomin )
-bind_key('-', zoomout)
-bind_key('=', (function() prop_set("video-zoom", "0") end))
