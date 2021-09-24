@@ -5,6 +5,10 @@ local prop_get = mp.get_property
 local prop_set = mp.set_property
 local evnt_set = mp.register_event
 local bind_key = mp.add_key_binding
+local exec_cmd = mp.command
+local osc_msgs = mp.osd_message
+
+local osc_options = { visibility = "always" }
 
 -- When reading an image mpv will just open the file and close it immediately
 -- after. This function will be called avery time a file gets loaded and if it's
@@ -15,6 +19,7 @@ evnt_set("file-loaded", (function(event)
 
    if name:match(".+(.png)") or name:match(".+(.jpg)") then
       prop_set("pause", "yes")
+      read_options(osc_options, "osc")
 
       -- Initiating the veiwer
       -- Mapping hl to move through the playlist using `playlist-next and
@@ -27,21 +32,15 @@ evnt_set("file-loaded", (function(event)
       --    + Zooming-in using '+';
       --    + Zooming-out using '-';
       --    + Deafult zoom value using '='.
-      bind_key('+', (function()
-         -- Getting the current zoom value
-         local zvalue = prop_get("video-zoom")
-
-         -- Actually zooming in the picture
-         prop_set("video-zoom", (zvalue + 0.1));
-      end))
-      bind_key('-', (function()
-         -- Getting the current zoom value
-         local zvalue = prop_get("video-zoom")
-
-         -- Actually zooming out of picture
-         prop_set("video-zoom", (zvalue - 0.1));
-      end))
       bind_key('=', (function() prop_set("video-zoom", "0") end))
+      bind_key('+', (function()
+                        prop_set("video-zoom", (prop_get("video-zoom") + 0.1))
+                        osc_msgs("Zooming-in")
+                     end))
+      bind_key('-', (function()
+                        prop_set("video-zoom", (prop_get("video-zoom") - 0.1))
+                        osc_msgs("Zooming-out")
+      end))
    end
 end))
 
