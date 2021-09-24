@@ -22,3 +22,24 @@ end))
 -- playlist-prev`
 bind_key('l', (function() mp.command("playlist-next") end))
 bind_key('h', (function() mp.command("playlist-prev") end))
+
+local function zoomin()
+   -- Getting the current zoom value
+   local zvalue = prop_get("video-zoom")
+
+   -- Actually zooming in the picture
+   prop_set("video-zoom", (zvalue + 0.1));
+end
+
+local function zoomout()
+   -- Getting the current zoom value
+   local zvalue = prop_get("video-zoom")
+
+   -- Actually zooming out of picture
+   prop_set("video-zoom", (zvalue - 0.1));
+end
+
+-- Common mapping like zoom in or zoom out (a bit more simple)
+bind_key('+', zoomin )
+bind_key('-', zoomout)
+bind_key('=', (function() prop_set("video-zoom", "0") end))
