@@ -113,6 +113,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-gotham"
   },
+  ["vim-racket"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-racket"
+  },
   ["zephyr-nvim"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/zephyr-nvim"

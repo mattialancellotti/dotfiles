@@ -8,7 +8,7 @@ local bind_key = mp.add_key_binding
 local exec_cmd = mp.command
 local osc_msgs = mp.osd_message
 
-local osc_options = { visibility = "always" }
+local osc_options = { visibility = "never" }
 
 -- When reading an image mpv will just open the file and close it immediately
 -- after. This function will be called avery time a file gets loaded and if it's
