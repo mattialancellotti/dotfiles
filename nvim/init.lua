@@ -47,7 +47,7 @@ opt.runtimepath:append( '~/.config/nvim/lua' )
 require('plugins')
 
 --  Color scheme
-cmd 'colorscheme nord'
+cmd 'colorscheme iceberg'
 
 -- Loading mappings
 local map = require('config').map

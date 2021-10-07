@@ -11,9 +11,6 @@ return require('packer').startup({function()
    use 'kadekillary/Turtles'
    use 'nightsense/cosmic_latte'
    use 'doums/darcula'
-   use 'Mofiqul/dracula.nvim'
-   use 'glepnir/zephyr-nvim'
-   use 'whatyouhide/vim-gotham'
    use 'arcticicestudio/nord-vim'
 
    -- Telescope:
@@ -31,6 +28,9 @@ return require('packer').startup({function()
       'nvim-lua/popup.nvim',
       requires = { 'nvim-lua/plenary.nvim' }
    }
+
+   -- Specific plugin for racket
+   use 'wlangstroth/vim-racket'
 end,
 config = {
    display = {
