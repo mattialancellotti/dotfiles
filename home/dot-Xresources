@@ -1,0 +1,19 @@
+! ~/.Xresources
+!
+#define _foregroundColor	#dcdccc
+#define _backgroundColor	#1f1f1f
+
+XTerm*utf8: 2
+XTerm*foreground: _foregroundColor
+XTerm*background: _backgroundColor
+
+URxvt*scrollBar: false
+URxvt*saveLines: 2000
+URxvt*font: xft:Iosevka:style=Medium:size=10:antialias=true
+URxvt*boldFont: xft:Iosevka:style=Heavy:size=10:atialias=true
+URxvt*italicFont: xft:Iosevka:style=Italic:size=10:atialias=true
+URxvt*boldItalicFont: xft:Iosevka:style=Bold\ Italic:size=10:atialias=true
+
+! Colors URxvt
+URxvt*foreground: _foregroundColor
+URxvt*background: _backgroundColor
