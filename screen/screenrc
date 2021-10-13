@@ -1,7 +1,0 @@
-bind j focus down
-bind k focus up
-bind h focus left
-bind l focus right
-mousetrack on
-
-term xterm-256color

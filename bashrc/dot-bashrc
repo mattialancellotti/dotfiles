@@ -1,0 +1,49 @@
+# /etc/skel/.bashrc
+#
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
+
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+
+# Put your fun stuff here.
+MANPAGER="less -w -R -I --use-color -Dd+g -Du+y -DSwr"
+
+export GOPATH="$HOME/.local/share/go"
+export DOTFILES="$HOME/.local/bin/dotfiles/scripts"
+export SCREENRC="$HOME/.config/screen/screenrc"
+#export GDK_BACKEND=wayland
+#export QT_QPA_PLATFORM=wayland
+
+# Adding local dotfiles
+PATH=$PATH:$DOTFILES
+
+export PS1="\[\033[04;36m\]\u\[\033[00;37m\] [\t · \j]— [\w]: "
+export EDITOR=nvim
+
+alias n=nnn
+alias imv=mpv
+alias vim=nvim
+alias vi=view
+alias ls="ls --color=auto"
+
+set checkwinsize
+
+BORG_MAN_PAGES=(
+  "borg" "borg-common" "borg-create" "borg-init" "borg-info" "borg-prune"
+  "borg-mount" "borg-extract" "borg-list" "borg-delete" "borg-recreate"
+  "borg-check" "borg-diff" "borg-upgrade" "borg-rename"
+);
+
+info-manuals() {
+  man $(echo -e $(echo "$@" | sed 's/\ /\\n/g') | fzf)
+}
+
+alias mborg="info-manuals ${BORG_MAN_PAGES[*]}"
