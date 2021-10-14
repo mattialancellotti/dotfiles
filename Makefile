@@ -1,6 +1,6 @@
 STOW = stow
 TDIR = ${HOME}/.config
-SFLAGS = -v 1 -t $(TDIR)
+SFLAGS = -v 1 -t $(TDIR) --dotfiles
 
 DIRS := $(shell ls -d */)
 CHCK := $(shell command -v $(STOW))
