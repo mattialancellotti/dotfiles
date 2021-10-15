@@ -10,5 +10,6 @@ ifeq ($(CHCK),)
   $(error The program '$(STOW)' is needed to run this Makefile.)
 endif
 
-configure :
+.PHONY: conf
+conf :
 	$(foreach pkg,$(DIRS),$(shell $(STOW) $(SFLAGS) $(basename $(pkg))))
