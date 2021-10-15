@@ -8,8 +8,6 @@ local bind_key = mp.add_key_binding
 local exec_cmd = mp.command
 local osc_msgs = mp.osd_message
 
-local osc_options = { visibility = "always" }
-
 -- When reading an image mpv will just open the file and close it immediately
 -- after. This function will be called avery time a file gets loaded and if it's
 -- an images it will set the `pause` option.
@@ -19,7 +17,7 @@ evnt_set("file-loaded", (function(event)
 
    if name:match(".+(.png)") or name:match(".+(.jpg)") then
       prop_set("pause", "yes")
-      read_options(osc_options, "osc")
+      prop_set("osc", "no")
 
       -- Initiating the veiwer
       -- Mapping hl to move through the playlist using `playlist-next and
