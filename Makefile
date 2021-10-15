@@ -1,15 +1,8 @@
 STOW = stow
+MENU = dialog
 CONF = ${HOME}/.config
 SFLAGS = --verbose=1 --target=$(CONF) --dotfiles
-
 DIRS := $(shell ls -d [^dot]*/)
-CHCK := $(shell command -v $(STOW))
-MENU = dialog
-
-# TDIR is the actual directory where stow will 'stow' all your config files.
-TDIR = ${HOME}/.config
-DIRS := $(shell ls -d */)
-SFLAGS = -v 1 -t $(TDIR) --dotfiles
 
 MFLAGS = --output-fd 1 --erase-on-exit --no-tags \
 	 --checklist "Choose which configs to load." 30 130 20
@@ -34,7 +27,7 @@ endif
 .PHONY: conf menu
 conf :
 	$(foreach pkg,$(DIRS),$(shell $(STOW) $(SFLAGS) $(basename $(pkg))))
-	@stow --target=$(HOME) --verbose=1 --dotfiles dot-home/
+	@stow --target=${HOME} --verbose=1 --dotfiles dot-home/
 
 # Displaying a tty menu using dialog to make the user choose which config file
 # should be stowed and which one should not.
