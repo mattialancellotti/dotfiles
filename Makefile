@@ -1,11 +1,9 @@
 STOW = stow
-<<<<<<< HEAD
 CONF = ${HOME}/.config
 SFLAGS = --verbose=1 --target=$(CONF) --dotfiles
 
 DIRS := $(shell ls -d [^dot]*/)
 CHCK := $(shell command -v $(STOW))
-=======
 MENU = dialog
 
 # TDIR is the actual directory where stow will 'stow' all your config files.
@@ -22,7 +20,6 @@ MARGS := $(foreach pkg,$(DIRS),$(pkg) $(pkg) off)
 # installed or not. The `-v` flag will print the actual pathof the binary.
 STOW_CHCK := $(shell command -v $(STOW))
 MENU_CHCK := $(shell command -v $(MENU))
->>>>>>> experimental
 
 # If no output was given, hence no binary was found, throw an error to warn the
 # user about what software needs to be installed.
@@ -37,13 +34,10 @@ endif
 .PHONY: conf menu
 conf :
 	$(foreach pkg,$(DIRS),$(shell $(STOW) $(SFLAGS) $(basename $(pkg))))
-<<<<<<< HEAD
 	@stow --target=$(HOME) --verbose=1 --dotfiles dot-home/
-=======
 
 # Displaying a tty menu using dialog to make the user choose which config file
 # should be stowed and which one should not.
 menu :
 	$(foreach pkg,$(shell $(MENU) $(MFLAGS) $(MARGS)),\
 			$(shell $(STOW) $(SFLAGS) $(basename $(pkg))))
->>>>>>> experimental
