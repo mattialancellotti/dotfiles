@@ -36,4 +36,7 @@ conf :
 # should be stowed and which one should not.
 menu :
 	$(foreach pkg,$(shell $(MENU) $(MFLAGS) $(MARGS)),\
-			$(shell $(STOW) $(SFLAGS) $(basename $(pkg))))
+			$(shell \
+				$(if $(findstring dot-home,$(pkg)),\
+				$(call SFUNC,1,${HOME},$(basename $(pkg))),\
+				$(call SFUNC,1,$(CONF),$(basename $(pkg))))))
