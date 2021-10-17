@@ -2,11 +2,12 @@ STOW = stow
 MENU = dialog
 CONF = ${HOME}/.config
 SFLAGS = --verbose=1 --target=$(CONF) --dotfiles
-DIRS := $(shell ls -d [^dot]*/)
+DIRS := $(shell ls -d */)
 
 MFLAGS = --output-fd 1 --erase-on-exit --no-tags \
 	 --checklist "Choose which configs to load." 30 130 20
 MARGS := $(foreach pkg,$(DIRS),$(pkg) $(pkg) off)
+SFUNC = $(STOW) --verbose=$(1) --target=$(2) --dotfiles $(3)
 
 # Test variables.
 # This variables use the built-in command `command` to check if a program is
@@ -26,8 +27,10 @@ endif
 
 .PHONY: conf menu
 conf :
-	$(foreach pkg,$(DIRS),$(shell $(STOW) $(SFLAGS) $(basename $(pkg))))
-	@stow --target=${HOME} --verbose=1 --dotfiles dot-home/
+	$(foreach pkg,$(DIRS),$(shell \
+				$(if $(findstring dot-home,$(pkg)),\
+				$(call SFUNC,1,${HOME},$(basename $(pkg))),\
+				$(call SFUNC,1,$(CONF),$(basename $(pkg))))))
 
 # Displaying a tty menu using dialog to make the user choose which config file
 # should be stowed and which one should not.
