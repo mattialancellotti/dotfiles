@@ -33,6 +33,7 @@ alias imv=mpv
 alias vim=nvim
 alias vi=view
 alias ls="ls --color=auto"
+alias lr="ls --color=auto -R"
 
 set checkwinsize
 
