@@ -1,7 +1,6 @@
 STOW = stow
 MENU = dialog
 CONF = ${HOME}/.config
-SFLAGS = --verbose=1 --target=$(CONF) --dotfiles
 DIRS := $(shell ls -d */)
 
 MFLAGS = --output-fd 1 --erase-on-exit --no-tags \
