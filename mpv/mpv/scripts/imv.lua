@@ -25,7 +25,6 @@ evnt_set("file-loaded", (function(event)
       bind_key('l', (function() mp.command("playlist-next") end))
       bind_key('h', (function() mp.command("playlist-prev") end))
 
-
       -- Configuring mpv with some image-viewer related functions like:
       --    + Zooming-in using '+';
       --    + Zooming-out using '-';
@@ -38,7 +37,25 @@ evnt_set("file-loaded", (function(event)
       bind_key('-', (function()
                         prop_set("video-zoom", (prop_get("video-zoom") - 0.1))
                         osc_msgs("Zooming-out")
-      end))
+                     end))
+
+      -- Mapping HJKL to move through the zoomed image using `video-pan-x` and
+      -- `video-pan-y`.
+      bind_key('H', (function()
+                        prop_set("video-pan-x",
+                                    (prop_get("video-pan-x") + 0.01))
+                     end))
+      bind_key('L', (function()
+                        prop_set("video-pan-x",
+                                    (prop_get("video-pan-x") - 0.01))
+                     end))
+      bind_key('J', (function()
+                        prop_set("video-pan-y",
+                                    (prop_get("video-pan-y") - 0.01))
+                     end))
+      bind_key('K', (function()
+                        prop_set("video-pan-y",
+                                    (prop_get("video-pan-y") + 0.01))
+                     end))
    end
 end))
-
