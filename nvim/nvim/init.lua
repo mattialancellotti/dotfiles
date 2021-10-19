@@ -78,9 +78,9 @@ map ('n', '<C-T>h', ':tabprev<CR>' )
 cmd [[
 augroup filetype
    au!
-   autocmd FileType sh    setl shiftwidth=2 softtabstop=2 expandtab
+   autocmd FileType sh,racket setl shiftwidth=2 softtabstop=2 expandtab
    autocmd FileType c,lua,*.h setl shiftwidth=3 softtabstop=3 expandtab
-   autocmd BufEnter *.h setl shiftwidth=3 softtabstop=3 expandtab
-   autocmd FileType make  setl tabstop=8 noexpandtab
+   autocmd BufEnter *.h       setl shiftwidth=3 softtabstop=3 expandtab
+   autocmd FileType make      setl tabstop=8 noexpandtab
 augroup END
 ]]
