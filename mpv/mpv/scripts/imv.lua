@@ -1,7 +1,4 @@
 -- TODO:
---    + Need to create an ImageViewer class so that I can better organize the
---      code, like creating lua tables to map actions like zooming-in/out to
---      keys without rewriting the function every time;
 --    + Proper OSC not that mpv crap (do not take that as an insult);
 --    + Cropping the image would be cool;
 --    + Blurring runtime would be cool;
@@ -10,12 +7,50 @@
 require 'mp'
 require 'mp.options'
 
-local prop_get = mp.get_property
-local prop_set = mp.set_property
+local prop_get = mp.get_property_native
+local prop_set = mp.set_property_native
 local evnt_set = mp.register_event
 local bind_key = mp.add_key_binding
 local exec_cmd = mp.command
 local osc_msgs = mp.osd_message
+
+-- This is an helper function designed to allow the user to load a table of
+-- options with a single function call. This only accepts tables that are built
+-- like this: property = "value", it won't rely on any index and also it won't
+-- update the value of the properties.
+local function loadOptions(options)
+   if options ~= nil then
+      for index, _ in ipairs(options) do
+         prop_set(options[index][1], options[index][2])
+      end
+   end
+end
+
+-- Short function to update a property and eventually display a message
+local function update(opt, update, msg)
+   prop_set(opt, prop_get(opt) + update)
+
+   if msg ~= nil then osc_msgs(msg) end
+end
+
+-- Really can't figure out how to make a decent zoom
+local function zoom(msg, value)
+   osc_msgs(msg)
+   local m = prop_get("mouse-pos")
+   local w = prop_get("osd-dimensions")
+
+   local x_offset = (m["x"] - w["w"]/2)/w["w"]
+   local y_offset = (m["y"] - w["h"]/2)/w["h"]
+   prop_set("video-pan-x", -x_offset)
+   prop_set("video-pan-y", -y_offset)
+   update("video-zoom", value)
+end
+
+local resetOptions = {
+   {"video-zoom", "0"},
+   {"video-pan-x", "0"},
+   {"video-pan-y", "0"}
+}
 
 -- When reading an image mpv will just open the file and close it immediately
 -- after. This function will be called avery time a file gets loaded and if it's
@@ -25,18 +60,8 @@ evnt_set("file-loaded", (function(event)
    local name = string.lower(prop_get("path"))
 
    if name:match(".+(.png)") or name:match(".+(.jpg)") then
-      prop_set("pause", "yes")
-      prop_set("osc", "no")
-
-      -- Showing filename
+      loadOptions({{"pause", "yes"}, {"osc","no" }})
       osc_msgs(prop_get("filename"))
-
-      -- Short function to update a property and eventually display a message
-      local function update(opt, update, msg)
-         prop_set(opt, prop_get(opt) + update)
-
-         if msg ~= nil then osc_msgs(msg) end
-      end
 
       -- Initiating the viewer
       -- Mapping hl to move through the playlist using `playlist-next and
@@ -48,11 +73,11 @@ evnt_set("file-loaded", (function(event)
       --    + Zooming-in using '+';
       --    + Zooming-out using '-';
       --    + Deafult zoom value using '='.
-      bind_key('=', (function() prop_set("video-zoom", "0") end))
+      bind_key('=', (function() loadOptions(resetOptions) end))
       bind_key('+', (function() update("video-zoom",  0.1, "Zooming-in")  end))
       bind_key('-', (function() update("video-zoom", -0.1, "Zooming-out") end))
-      bind_key('WHEEL_UP',
-                    (function() update("video-zoom",  0.1, "Zooming-int") end))
+      bind_key('WHEEL_UP',   (function() zoom("Zooming-in",   0.05) end))
+      bind_key('WHEEL_DOWN', (function() zoom("Zooming-out", -0.05) end))
 
       -- Mapping HJKL to move through the zoomed image using `video-pan-x` and
       -- `video-pan-y`.
