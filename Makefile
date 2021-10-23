@@ -1,12 +1,26 @@
+# The needed programs
 STOW = stow
 MENU = dialog
-CONF = ${HOME}/.config
+
+# Collecting all the configuration files in the current directory
 DIRS := $(shell ls -d */)
 
+# Paths to which copy your dotfiles
+LCONF = ${HOME}/.config
+HCONF = ${HOME}
+
+# $(MENU) arguments
 MFLAGS = --output-fd 1 --erase-on-exit --no-tags \
 	 --checklist "Choose which configs to load." 30 130 20
 MARGS := $(foreach pkg,$(DIRS),$(pkg) $(pkg) off)
-SFUNC = $(STOW) --verbose=$(1) --target=$(2) --dotfiles $(3)
+
+# Usefull functions
+SFUNC = $(STOW) --verbose=1 --target=$(1) --dotfiles $(2)
+MFUNC = $(MENU) $(MFLAGS) $(MARGS)
+INSTALL = $(foreach pkg,$(1),$(shell \
+	  	$(if $(findstring dot-home,$(pkg)), \
+	  		$(call SFUNC,$(HCONF),$(basename $(pkg))),\
+			$(call SFUNC,$(LCONF),$(basename $(pkg))))))
 
 # Test variables.
 # This variables use the built-in command `command` to check if a program is
@@ -26,16 +40,10 @@ endif
 
 .PHONY: conf menu
 conf :
-	$(foreach pkg,$(DIRS),$(shell \
-				$(if $(findstring dot-home,$(pkg)),\
-				$(call SFUNC,1,${HOME},$(basename $(pkg))),\
-				$(call SFUNC,1,$(CONF),$(basename $(pkg))))))
+	$(call INSTALL,$(DIRS))
 
 # Displaying a tty menu using dialog to make the user choose which config file
 # should be stowed and which one should not.
+DIRS=$(call MFUNC)
 menu :
-	$(foreach pkg,$(shell $(MENU) $(MFLAGS) $(MARGS)),\
-			$(shell \
-				$(if $(findstring dot-home,$(pkg)),\
-				$(call SFUNC,1,${HOME},$(basename $(pkg))),\
-				$(call SFUNC,1,$(CONF),$(basename $(pkg))))))
+	$(call INSTALL,$(shell $(call MFUNC)))
