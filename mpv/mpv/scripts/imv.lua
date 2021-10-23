@@ -1,11 +1,9 @@
 -- TODO:
 --    + Proper OSC not that mpv crap (do not take that as an insult);
---    + Cropping the image would be cool;
---    + Blurring runtime would be cool;
 --    + Collection project.
 --
-require 'mp'
-require 'mp.options'
+local mp       = (require 'mp')
+local options  = (require 'mp.options')
 
 local prop_get = mp.get_property_native
 local prop_set = mp.set_property_native
