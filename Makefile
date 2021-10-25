@@ -16,11 +16,13 @@ MARGS := $(foreach pkg,$(DIRS),$(pkg) $(pkg) off)
 
 # Usefull functions
 SFUNC = $(STOW) --verbose=1 --target=$(1) --dotfiles $(2)
+UFUNC = $(STOW) --verbose=1 --target=$(1) --dotfiles --delete $(2)
 MFUNC = $(MENU) $(MFLAGS) $(MARGS)
-INSTALL := $(foreach pkg,$(1),$(shell \
+
+INSTALL = $(foreach pkg,$(1),$(shell \
 	  	$(if $(findstring dot-home,$(pkg)), \
-	  		$(call SFUNC,$(HCONF),$(basename $(pkg))),\
-			$(call SFUNC,$(LCONF),$(basename $(pkg))))))
+	  		$(call $(2),$(HCONF),$(basename $(pkg))),\
+			$(call $(2),$(LCONF),$(basename $(pkg))))))
 
 # Test variables.
 # This variables use the built-in command `command` to check if a program is
@@ -40,10 +42,12 @@ endif
 
 .PHONY: conf menu
 config:
-	$(call INSTALL,$(DIRS))
+	$(call INSTALL,$(DIRS),SFUNC)
+
+deconfig:
+	$(call INSTALL,$(DIRS),UFUNC)
 
 # Displaying a tty menu using dialog to make the user choose which config file
 # should be stowed and which one should not.
-DIRS=$(call MFUNC)
 menuconfig:
-	$(call INSTALL,$(shell $(call MFUNC)))
+	$(call INSTALL,$(shell $(call MFUNC)),SFUNC)
