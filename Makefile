@@ -17,7 +17,7 @@ MARGS := $(foreach pkg,$(DIRS),$(pkg) $(pkg) off)
 # Usefull functions
 SFUNC = $(STOW) --verbose=1 --target=$(1) --dotfiles $(2)
 MFUNC = $(MENU) $(MFLAGS) $(MARGS)
-INSTALL = $(foreach pkg,$(1),$(shell \
+INSTALL := $(foreach pkg,$(1),$(shell \
 	  	$(if $(findstring dot-home,$(pkg)), \
 	  		$(call SFUNC,$(HCONF),$(basename $(pkg))),\
 			$(call SFUNC,$(LCONF),$(basename $(pkg))))))
@@ -39,11 +39,11 @@ ifeq ($(MENU_CHCK),)
 endif
 
 .PHONY: conf menu
-conf :
+config:
 	$(call INSTALL,$(DIRS))
 
 # Displaying a tty menu using dialog to make the user choose which config file
 # should be stowed and which one should not.
 DIRS=$(call MFUNC)
-menu :
+menuconfig:
 	$(call INSTALL,$(shell $(call MFUNC)))
