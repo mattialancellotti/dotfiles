@@ -37,7 +37,7 @@ ifeq ($(STOW_CHCK),)
 endif
 
 ifeq ($(MENU_CHCK),)
-  $(error The program '$(MENU)' is needed to run this Makefile.)
+  $(warning The program '$(MENU)' is needed to run `make menuconfig`.)
 endif
 
 .PHONY: conf menu
