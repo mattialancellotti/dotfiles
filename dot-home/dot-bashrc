@@ -18,13 +18,13 @@ MANPAGER="less -w -R -I --use-color -Dd+g -Du+y -DSwr"
 
 export MAILDIR="$HOME/.local/share/mails"
 export GOPATH="$HOME/.local/share/go"
-export DOTFILES="$HOME/.local/bin/dotfiles/scripts"
+export UTILITIES="$HOME/.local/bin/dotfiles/"
 export SCREENRC="$HOME/.config/screen/screenrc"
 #export GDK_BACKEND=wayland
 #export QT_QPA_PLATFORM=wayland
 
 # Adding local dotfiles
-PATH=$PATH:$DOTFILES
+PATH=$PATH:$UTILITIES
 
 export PS1="\[\033[04;36m\]\u\[\033[00;37m\] [\t · \j]— [\w]: "
 export EDITOR=nvim
