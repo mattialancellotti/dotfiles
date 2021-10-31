@@ -9,6 +9,14 @@
 local cmd = vim.cmd --  To execute Vim commands
 local opt = vim.opt --  To set options
 
+-- This checks whether the given path (packer's installation path) is empty or
+-- not. If there is nothing in there than the script proceeds with the
+-- installation.
+local install_path = vim.fn.stdpath 'data'..'/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+end
+
 -- Different terminals might have different support for colors.
 -- Recently I have been using 24-bit enabled terminals like Alacritty and
 -- tmux, but I've also tried non-24-bit enabled terminals like GNU Screen and
@@ -24,6 +32,9 @@ end
 
 -- Saving changes automatically when executing things like ':make'
 opt.autowrite = true
+
+-- TODO: Only if lightline is enabled
+opt.showmode = false
 
 opt.number = true
 opt.relativenumber = true
@@ -47,7 +58,7 @@ opt.runtimepath:append( '~/.config/nvim/lua' )
 require('plugins')
 
 --  Color scheme
-cmd 'colorscheme iceberg'
+cmd 'colorscheme badwolf'
 
 -- Loading mappings
 local map = require('config').map
