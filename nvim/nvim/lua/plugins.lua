@@ -9,10 +9,16 @@ return require('packer').startup({function()
    -- My hundreds of colorschemes
    use 'cocopon/iceberg.vim'
    use 'kadekillary/Turtles'
-   use 'nightsense/cosmic_latte'
+   use 'haystackandroid/cosmic_latte'
    use 'doums/darcula'
    use 'arcticicestudio/nord-vim'
+   use 'sjl/badwolf'
 
+   -- Galaxy theme for status line
+   use {
+      'itchyny/lightline.vim',
+   }
+   
    -- Telescope:
    --   A plugin for fuzzy finding stuff (especially files). It's written in
    --   lua and requires 2 libraries from the nvim-lua git repository:
