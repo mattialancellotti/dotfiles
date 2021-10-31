@@ -14,10 +14,11 @@ return require('packer').startup({function()
    use 'arcticicestudio/nord-vim'
    use 'sjl/badwolf'
 
+   -- Session manager
+   use 'mattialancellotti/simple-session-manager'
+
    -- Galaxy theme for status line
-   use {
-      'itchyny/lightline.vim',
-   }
+   use 'itchyny/lightline.vim'
    
    -- Telescope:
    --   A plugin for fuzzy finding stuff (especially files). It's written in

@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/Turtles"
   },
+  badwolf = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/badwolf"
+  },
   cosmic_latte = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/cosmic_latte"
@@ -81,13 +85,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/darcula"
   },
-  ["dracula.nvim"] = {
-    loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/dracula.nvim"
-  },
   ["iceberg.vim"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/iceberg.vim"
+  },
+  ["lightline.vim"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/lightline.vim"
   },
   ["nord-vim"] = {
     loaded = true,
@@ -105,21 +109,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["simple-session-manager"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/simple-session-manager"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
-  ["vim-gotham"] = {
-    loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-gotham"
-  },
   ["vim-racket"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-racket"
-  },
-  ["zephyr-nvim"] = {
-    loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/zephyr-nvim"
   }
 }
 
