@@ -1,0 +1,12 @@
+#info
+g   first-node
+G   last-node
+H   prev-node
+L   next-node
+j   next-line
+k   prev-line
+
+#var
+link-style=cyan,underline
+active-link-style=white,bold
+match-style=yellow,bold
