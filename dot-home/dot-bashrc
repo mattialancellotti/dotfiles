@@ -14,7 +14,8 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Put your fun stuff here.
-MANPAGER="less -w -R -I --use-color -Dd+g -Du+y -DSwr"
+#MANPAGER="less -w -R -I --use-color -Dd+g -Du+y -DSwr"
+MANPAGER="nvim +Man!"
 
 export MAILDIR="$HOME/.local/share/mails"
 export GOPATH="$HOME/.local/share/go"
