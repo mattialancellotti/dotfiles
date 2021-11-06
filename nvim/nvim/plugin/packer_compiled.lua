@@ -71,59 +71,107 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   Turtles = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/Turtles"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/Turtles",
+    url = "https://github.com/kadekillary/Turtles"
   },
   badwolf = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/badwolf"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/badwolf",
+    url = "https://github.com/sjl/badwolf"
   },
   cosmic_latte = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/cosmic_latte"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/cosmic_latte",
+    url = "https://github.com/haystackandroid/cosmic_latte"
   },
   darcula = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/darcula"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/darcula",
+    url = "https://github.com/doums/darcula"
   },
   ["iceberg.vim"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/iceberg.vim"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/iceberg.vim",
+    url = "https://github.com/cocopon/iceberg.vim"
   },
   ["lightline.vim"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/lightline.vim"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/lightline.vim",
+    url = "https://github.com/itchyny/lightline.vim"
   },
   ["nord-vim"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nord-vim"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nord-vim",
+    url = "https://github.com/arcticicestudio/nord-vim"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["popup.nvim"] = {
-    loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/popup.nvim"
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/opt/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
   },
   ["simple-session-manager"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/simple-session-manager"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/simple-session-manager",
+    url = "https://github.com/mattialancellotti/simple-session-manager"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["vim-racket"] = {
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-racket"
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-racket",
+    url = "https://github.com/wlangstroth/vim-racket"
   }
 }
 
 time([[Defining packer_plugins]], false)
+local module_lazy_loads = {
+  ["^popup%.nvim"] = "popup.nvim"
+}
+local lazy_load_called = {['packer.load'] = true}
+local function lazy_load_module(module_name)
+  local to_load = {}
+  if lazy_load_called[module_name] then return nil end
+  lazy_load_called[module_name] = true
+  for module_pat, plugin_name in pairs(module_lazy_loads) do
+    if not _G.packer_plugins[plugin_name].loaded and string.match(module_name, module_pat) then
+      to_load[#to_load + 1] = plugin_name
+    end
+  end
+
+  if #to_load > 0 then
+    require('packer.load')(to_load, {module = module_name}, _G.packer_plugins)
+    local loaded_mod = package.loaded[module_name]
+    if loaded_mod then
+      return function(modname) return loaded_mod end
+    end
+  end
+end
+
+if not vim.g.packer_custom_loader_enabled then
+  table.insert(package.loaders, 1, lazy_load_module)
+  vim.g.packer_custom_loader_enabled = true
+end
+
 if should_profile then save_profiles() end
 
 end)
