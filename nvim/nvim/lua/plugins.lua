@@ -32,8 +32,13 @@ return require('packer').startup({function()
    }
 
    -- Tresitter
-   --    Neovim plugin that improves highlighting. As far as I know it will be
-   --    integrated in neovim in a future version.
+   --    Neovim plugin that improves highlighting, indentation and some other
+   --    thing. As far as I know it will be integrated in neovim in a future
+   --    version. Unfortunately as for 2021-11-06 it does not support some
+   --    languages like racket or haskell.
+   --
+   --    BUG: Unable to install custom (not mine) parser for racket. (See setup
+   --         function)
    use {
       'nvim-treesitter/nvim-treesitter',
       --[[
@@ -61,7 +66,7 @@ return require('packer').startup({function()
             additional_vim_regex_highlighting = false
          },
          -- Enabling indentation
-         indent = { enable = true}
+         indent = { enable = true }
       })
    }
 
@@ -77,12 +82,10 @@ return require('packer').startup({function()
    --    get loaded. Because of this you must not lazy-load this on filetype
    --    'racket', since it won't be installed anyways and also it won't be
    --    recognized without this plugin.
-   use 'wlangstroth/vim-racket'
+   use { 'wlangstroth/vim-racket' }
 end,
 config = {
    display = {
-      open_fn = function()
-         return require('packer.util').float({ border = 'single' })
-      end
+      prompt_border = 'single'
    }
 }})
