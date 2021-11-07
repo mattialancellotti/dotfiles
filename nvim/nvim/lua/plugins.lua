@@ -31,6 +31,12 @@ return require('packer').startup({function()
       requires = {{ 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' }}
    }
 
+   -- Fugitive
+   --    The best vim plugin for using git from the editor. Compatible with
+   --    Neovim too. Apparently it's called Fugitive because it's so good that
+   --    it's illegal.
+   use { 'tpope/vim-fugitive' }
+
    -- Tresitter
    --    Neovim plugin that improves highlighting, indentation and some other
    --    thing. As far as I know it will be integrated in neovim in a future
@@ -41,18 +47,6 @@ return require('packer').startup({function()
    --         function)
    use {
       'nvim-treesitter/nvim-treesitter',
-      --[[
-      setup = function()
-         local p = require('nvim-treesitter.parsers').get_parser_configs()
-         p.racket = {
-            install_info = {
-               url = "tautologico/tree-sitter-racket",
-               files = {"src/parser.c"}
-            },
-            filetype = "racket"
-         }
-      end,
-]]
       run = "TSUpdate",
       config = require('nvim-treesitter.configs').setup({
          --Ensuring some languages are installed
