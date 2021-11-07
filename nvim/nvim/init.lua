@@ -31,11 +31,9 @@ if env.COLORTERM == "truecolor" then
    opt.termguicolors = true
 end
 
+
 -- Saving changes automatically when executing things like ':make'
 opt.autowrite = true
-
--- TODO: Only if lightline is enabled
-opt.showmode = false
 
 opt.number = true
 opt.relativenumber = true
@@ -54,9 +52,11 @@ opt.wildignore = { '*.o', '*.ghc', '*.out', '__pycache__' }
 opt.sessionoptions = { 'buffers', 'folds', 'globals', 'help', 'terminal',
                        'tabpages', 'winpos', 'winsize', 'options' }
 opt.runtimepath:append( '~/.config/nvim/lua' )
+opt.showmode = false
 
 -- Loading plugins
 require('plugins')
+
 
 --  Color scheme
 cmd 'colorscheme badwolf'
@@ -77,8 +77,8 @@ map ('n', 'tf', ':Telescope find_files<CR>', { silent = true })
 -- Managing buffers
 map ('n', 'tb', ':Telescope buffers<CR>', { silent = true })
 map ('n', 'tl', ':bnext<CR>', { silent = true })
-map ('n', 'th', ':bprev<CR>'  )
-map ('n', 'tq', ':bdelete<CR>')
+map ('n', 'th', ':bprev<CR>', { silent = true })
+map ('n', 'tq', ':bdelete<CR>', { silent = true })
 
 -- Managing windows
 map ('n', '<C-T>q', ':tabclose<CR>')
@@ -95,6 +95,6 @@ if exe.has('autocmd') then
       autocmd FileType c,lua,*.h setl shiftwidth=3 softtabstop=3 expandtab
       autocmd BufEnter *.h       setl shiftwidth=3 softtabstop=3 expandtab
       autocmd FileType make      setl tabstop=8 noexpandtab
-  augroup END
+   augroup END
    ]]
 end
