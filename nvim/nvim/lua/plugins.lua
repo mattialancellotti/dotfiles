@@ -59,8 +59,8 @@ return require('packer').startup({function()
             enable = true,
             additional_vim_regex_highlighting = false
          },
-         -- Enabling indentation
-         indent = { enable = true }
+         -- Disabling indentation
+         indent = { enable = false }
       })
    }
 
@@ -80,6 +80,8 @@ return require('packer').startup({function()
 end,
 config = {
    display = {
-      prompt_border = 'single'
+      open_fn = function()
+         return require('packer.util').float({border = 'single'})
+      end
    }
 }})
