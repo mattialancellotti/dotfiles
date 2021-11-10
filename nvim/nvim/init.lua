@@ -59,7 +59,7 @@ require('plugins')
 
 
 --  Color scheme
-cmd 'colorscheme badwolf'
+cmd 'colorscheme siena'
 
 -- Loading mappings
 local map = require('config').map

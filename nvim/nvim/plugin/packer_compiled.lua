@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/lightline.vim",
     url = "https://github.com/itchyny/lightline.vim"
   },
+  melange = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/melange",
+    url = "https://github.com/savq/melange"
+  },
   ["nord-vim"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nord-vim",
@@ -126,6 +131,11 @@ _G.packer_plugins = {
     path = "/home/mattia/.local/share/nvim/site/pack/packer/opt/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["siena.vim"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/siena.vim",
+    url = "https://github.com/brettbar/siena.vim"
+  },
   ["simple-session-manager"] = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/simple-session-manager",
@@ -135,6 +145,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-racket"] = {
     loaded = true,

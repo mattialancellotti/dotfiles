@@ -6,7 +6,9 @@ return require('packer').startup({function()
 
    -- My hundreds of colorschemes
    use { 'sjl/badwolf' }
+   use { 'savq/melange' }
    use { 'doums/darcula' }
+   use { 'brettbar/siena.vim' }
    use { 'cocopon/iceberg.vim' }
    use { 'kadekillary/Turtles' }
    use { 'arcticicestudio/nord-vim' }
