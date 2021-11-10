@@ -31,7 +31,6 @@ if env.COLORTERM == "truecolor" then
    opt.termguicolors = true
 end
 
-
 -- Saving changes automatically when executing things like ':make'
 opt.autowrite = true
 
@@ -56,7 +55,6 @@ opt.showmode = false
 
 -- Loading plugins
 require('plugins')
-
 
 --  Color scheme
 cmd 'colorscheme siena'
@@ -88,13 +86,5 @@ map ('n', '<C-T>h', ':tabprev<CR>' )
 
 -- Creating autocmds
 if exe.has('autocmd') then
-   cmd [[
-   augroup filetype
-      au!
-      autocmd FileType sh,racket setl shiftwidth=2 softtabstop=2 expandtab
-      autocmd FileType c,lua,*.h setl shiftwidth=3 softtabstop=3 expandtab
-      autocmd BufEnter *.h       setl shiftwidth=3 softtabstop=3 expandtab
-      autocmd FileType make      setl tabstop=8 noexpandtab
-   augroup END
-   ]]
+   cmd 'source $HOME/.config/nvim/autocmds.vim'
 end
