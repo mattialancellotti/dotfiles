@@ -57,7 +57,7 @@ opt.showmode = false
 require('plugins')
 
 --  Color scheme
-cmd 'colorscheme siena'
+cmd 'colorscheme darcula'
 
 -- Loading mappings
 local map = require('config').map

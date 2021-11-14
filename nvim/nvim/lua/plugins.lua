@@ -53,7 +53,7 @@ return require('packer').startup({function()
       config = require('nvim-treesitter.configs').setup({
          --Ensuring some languages are installed
          ensure_installed = {
-            "c", "cpp", "java", "dockerfile", "lua",
+            "c", "cpp", "java", "dockerfile", "lua", "go",
             "latex", "python", "vim", "bash", "comment"
          },
          -- Configuring highlighting for all modules
