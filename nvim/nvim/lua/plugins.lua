@@ -50,11 +50,22 @@ return require('packer').startup({function()
    use {
       'nvim-treesitter/nvim-treesitter',
       run = "TSUpdate",
+      setup = function()
+         local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+         parser_config.make = {
+            install_info = {
+               url = "~/code/tree-sitter-make",
+               files = {"src/parser.c"}
+            },
+            filetype = "make",
+            used_by = {"make"}
+         }
+      end,
       config = require('nvim-treesitter.configs').setup({
          --Ensuring some languages are installed
          ensure_installed = {
             "c", "cpp", "java", "dockerfile", "lua", "go",
-            "latex", "python", "vim", "bash", "comment"
+            "latex", "python", "vim", "bash", "comment", "make"
          },
          -- Configuring highlighting for all modules
          highlight = {

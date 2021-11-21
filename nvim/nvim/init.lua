@@ -88,14 +88,3 @@ map ('n', '<C-T>h', ':tabprev<CR>' )
 if exe.has('autocmd') then
    cmd 'source $HOME/.config/nvim/autocmds.vim'
 end
-
--- TEMP: Makefile support for treesitter
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-parser_config.make = {
-   install_info = {
-      url = "~/code/tree-sitter-make",
-      files = {"src/parser.c"}
-   },
-   filetype = "make",
-   used_by = {"make"}
-}
