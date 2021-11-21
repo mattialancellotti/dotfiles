@@ -152,10 +152,8 @@ _G.packer_plugins = {
     url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-racket"] = {
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/opt/vim-racket",
+    loaded = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-racket",
     url = "https://github.com/wlangstroth/vim-racket"
   }
 }
@@ -189,13 +187,6 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Event lazy-loads
-time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufEnter *.rkt ++once lua require("packer.load")({'vim-racket'}, { event = "BufEnter *.rkt" }, _G.packer_plugins)]]
-time([[Defining lazy-load event autocommands]], false)
-vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

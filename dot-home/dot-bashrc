@@ -25,7 +25,7 @@ export SCREENRC="$HOME/.config/screen/screenrc"
 #export QT_QPA_PLATFORM=wayland
 
 # Adding local dotfiles
-PATH=$PATH:$UTILITIES/scripts/
+PATH=$PATH:$UTILITIES/scripts/:$HOME/code/tree-sitter-make/node_modules/.bin
 
 export PS1="\[\033[04;36m\]\u\[\033[00;37m\] [\t · \j]— [\w]: "
 export EDITOR=nvim
