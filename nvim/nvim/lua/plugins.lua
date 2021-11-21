@@ -42,15 +42,13 @@ return require('packer').startup({function()
    -- Tresitter
    --    Neovim plugin that improves highlighting, indentation and some other
    --    thing. As far as I know it will be integrated in neovim in a future
-   --    version. Unfortunately as for 2021-11-06 it does not support some
-   --    languages like racket or haskell.
-   --
-   --    BUG: Unable to install custom (not mine) parser for racket. (See setup
-   --         function)
+   --    version.
    use {
       'nvim-treesitter/nvim-treesitter',
       run = "TSUpdate",
       setup = function()
+      end,
+      config = function()
          local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
          parser_config.make = {
             install_info = {
@@ -59,22 +57,32 @@ return require('packer').startup({function()
             },
             filetype = "make",
             used_by = {"make"}
+         } 
+
+         parser_config.racket = {
+            install_info = {
+               url = "~/code/tree-sitter-racket",
+               files = {"src/parser.c"}
+            },
+            filetype = "racket",
+            used_by = {"racket"}
          }
-      end,
-      config = require('nvim-treesitter.configs').setup({
-         --Ensuring some languages are installed
-         ensure_installed = {
-            "c", "cpp", "java", "dockerfile", "lua", "go",
-            "latex", "python", "vim", "bash", "comment", "make"
-         },
-         -- Configuring highlighting for all modules
-         highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false
-         },
-         -- Disabling indentation
-         indent = { enable = false }
-      })
+
+         return require('nvim-treesitter.configs').setup({
+            --Ensuring some languages are installed
+            ensure_installed = {
+               "c", "cpp", "java", "dockerfile", "lua", "go", "racket",
+               "latex", "python", "vim", "bash", "comment", "make"
+            },
+            -- Configuring highlighting for all modules
+            highlight = {
+               enable = true,
+               additional_vim_regex_highlighting = false
+            },
+            -- Disabling indentation
+            indent = { enable = false }
+         })
+      end
    }
 
    -- Popup library

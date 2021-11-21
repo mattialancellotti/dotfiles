@@ -110,8 +110,10 @@ _G.packer_plugins = {
     url = "https://github.com/arcticicestudio/nord-vim"
   },
   ["nvim-treesitter"] = {
+    config = { "\27LJ\1\2Æ\4\0\0\4\0\25\0!4\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\0023\1\a\0003\2\4\0003\3\5\0:\3\6\2:\2\b\0013\2\t\0:\2\n\1:\1\3\0003\1\14\0003\2\f\0003\3\r\0:\3\6\2:\2\b\0013\2\15\0:\2\n\1:\1\v\0004\1\0\0%\2\16\0>\1\2\0027\1\17\0013\2\19\0003\3\18\0:\3\20\0023\3\21\0:\3\22\0023\3\23\0:\3\24\2@\1\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\14\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\nsetup\28nvim-treesitter.configs\1\2\0\0\vracket\1\0\1\rfiletype\vracket\1\2\0\0\17src/parser.c\1\0\1\burl\30~/code/tree-sitter-racket\vracket\fused_by\1\2\0\0\tmake\17install_info\1\0\1\rfiletype\tmake\nfiles\1\2\0\0\17src/parser.c\1\0\1\burl\28~/code/tree-sitter-make\tmake\23get_parser_configs\28nvim-treesitter.parsers\frequire\0" },
     loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    needs_bufread = true,
+    path = "/home/mattia/.local/share/nvim/site/pack/packer/opt/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["packer.nvim"] = {
@@ -187,6 +189,17 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
+-- Setup for: nvim-treesitter
+time([[Setup for nvim-treesitter]], true)
+try_loadstring("\27LJ\1\2\v\0\0\1\0\0\0\1G\0\1\0\0", "setup", "nvim-treesitter")
+time([[Setup for nvim-treesitter]], false)
+time([[packadd for nvim-treesitter]], true)
+vim.cmd [[packadd nvim-treesitter]]
+time([[packadd for nvim-treesitter]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\1\2Æ\4\0\0\4\0\25\0!4\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\0023\1\a\0003\2\4\0003\3\5\0:\3\6\2:\2\b\0013\2\t\0:\2\n\1:\1\3\0003\1\14\0003\2\f\0003\3\r\0:\3\6\2:\2\b\0013\2\15\0:\2\n\1:\1\v\0004\1\0\0%\2\16\0>\1\2\0027\1\17\0013\2\19\0003\3\18\0:\3\20\0023\3\21\0:\3\22\0023\3\23\0:\3\24\2@\1\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\14\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\nsetup\28nvim-treesitter.configs\1\2\0\0\vracket\1\0\1\rfiletype\vracket\1\2\0\0\17src/parser.c\1\0\1\burl\30~/code/tree-sitter-racket\vracket\fused_by\1\2\0\0\tmake\17install_info\1\0\1\rfiletype\tmake\nfiles\1\2\0\0\17src/parser.c\1\0\1\burl\28~/code/tree-sitter-make\tmake\23get_parser_configs\28nvim-treesitter.parsers\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 if should_profile then save_profiles() end
 
 end)
