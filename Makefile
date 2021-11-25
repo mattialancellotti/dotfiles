@@ -40,7 +40,7 @@ ifeq ($(MENU_CHCK),)
   $(warning The program '$(MENU)' is needed to run `make menuconfig`.)
 endif
 
-.PHONY: conf menu
+.PHONY: config deconfig menuconfig
 config:
 	$(call INSTALL,$(DIRS),SFUNC)
 
