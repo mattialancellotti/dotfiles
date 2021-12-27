@@ -12,7 +12,8 @@
     bindsym $mod+Shift+p exec $menu
 
     # Screenshot utility
-    bindsym $mod+p exec grim -g "$(slurp)"
+    bindsym Alt+p exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/screenshot_$(date +"%Y%m%d")_$(date +"%Hh%Mm%Ss").png
+    bindsym Alt+Shift+p exec grim -g "$(slurp)" - | wl-copy
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

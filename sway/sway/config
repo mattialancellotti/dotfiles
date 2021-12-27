@@ -37,4 +37,4 @@ include ~/.config/sway/config.d/03-appearance
 include ~/.config/sway/config.d/04-modes
 include ~/.config/sway/config.d/05-bar
 
-exec --no-startup-id pipewire
+exec gentoo-pipewire-launcher
