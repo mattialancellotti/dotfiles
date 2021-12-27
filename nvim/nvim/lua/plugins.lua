@@ -13,6 +13,7 @@ return require('packer').startup({function()
    use { 'kadekillary/Turtles' }
    use { 'arcticicestudio/nord-vim' }
    use { 'haystackandroid/cosmic_latte' }
+   use { 'https://github.com/sainnhe/everforest' }
 
    -- Session manager
    use {

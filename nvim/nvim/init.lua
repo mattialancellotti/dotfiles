@@ -57,7 +57,7 @@ opt.showmode = false
 require('plugins')
 
 --  Color scheme
-cmd 'colorscheme badwolf'
+cmd 'colorscheme everforest'
 
 -- Loading mappings
 local map = require('config').map
