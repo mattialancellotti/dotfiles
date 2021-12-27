@@ -74,8 +74,8 @@ evnt_set("file-loaded", (function(event)
       bind_key('=', (function() loadOptions(resetOptions) end))
       bind_key('+', (function() update("video-zoom",  0.1, "Zooming-in")  end))
       bind_key('-', (function() update("video-zoom", -0.1, "Zooming-out") end))
-      bind_key('WHEEL_UP',   (function() zoom("Zooming-in",   0.05) end))
-      bind_key('WHEEL_DOWN', (function() zoom("Zooming-out", -0.05) end))
+      bind_key('WHEEL_UP',   (function() zoom("Zooming-in",   0.1) end))
+      bind_key('WHEEL_DOWN', (function() zoom("Zooming-out", -0.1) end))
 
       -- Mapping HJKL to move through the zoomed image using `video-pan-x` and
       -- `video-pan-y`.

@@ -2,7 +2,6 @@ README
 ------
 
 # My dotfiles
-
 ## Introduction
 Not all of my dotfiles are available yet, I'm working on it. Most of these
 programs are not used, like screen, and so they won't be updated.
