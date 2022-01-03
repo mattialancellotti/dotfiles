@@ -40,6 +40,19 @@ return require('packer').startup({function()
    --    it's illegal.
    use { 'tpope/vim-fugitive' }
 
+   -- NViM-Tree
+   --    File explorer for neovim written entirely in lua.
+   --    This is going to replace netrw
+   use {
+      'kyazdani42/nvim-tree.lua',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      setup = require('nvim-tree').setup({
+         disable_netrw = true,
+         hijack_netrw  = true,
+         open_on_setup = false
+      })
+   }
+
    -- Tresitter
    --    Neovim plugin that improves highlighting, indentation and some other
    --    thing. As far as I know it will be integrated in neovim in a future
@@ -47,8 +60,6 @@ return require('packer').startup({function()
    use {
       'nvim-treesitter/nvim-treesitter',
       run = "TSUpdate",
-      setup = function()
-      end,
       config = function()
          local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
          parser_config.make = {
@@ -73,7 +84,7 @@ return require('packer').startup({function()
             --Ensuring some languages are installed
             ensure_installed = {
                "c", "cpp", "java", "dockerfile", "lua", "go", "racket",
-               "latex", "python", "vim", "bash", "comment", "make"
+               "latex", "python", "vim", "bash", "comment", "make", "commonlisp"
             },
             -- Configuring highlighting for all modules
             highlight = {
