@@ -1,5 +1,14 @@
 -- plugins.lua
 
+-- This checks whether the given path (packer's installation path) is empty or
+-- not. If there is nothing in there than the script proceeds with the
+-- installation.
+local exe = vim.fn
+local install_path = exe.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if exe.empty(exe.glob(install_path)) > 0 then
+   packer_bootstrap = exe.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
 return require('packer').startup({function()
    -- Packer to manage itself
    use { 'wbthomason/packer.nvim' }
@@ -8,12 +17,12 @@ return require('packer').startup({function()
    use { 'sjl/badwolf' }
    use { 'savq/melange' }
    use { 'doums/darcula' }
+   use { 'sainnhe/everforest' }
    use { 'brettbar/siena.vim' }
    use { 'cocopon/iceberg.vim' }
    use { 'kadekillary/Turtles' }
    use { 'arcticicestudio/nord-vim' }
    use { 'haystackandroid/cosmic_latte' }
-   use { 'https://github.com/sainnhe/everforest' }
 
    -- Session manager
    use {
@@ -46,11 +55,6 @@ return require('packer').startup({function()
    use {
       'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons' },
-      setup = require('nvim-tree').setup({
-         disable_netrw = true,
-         hijack_netrw  = true,
-         open_on_setup = false
-      })
    }
 
    -- Tresitter
@@ -110,6 +114,11 @@ return require('packer').startup({function()
    --    'racket', since it won't be installed anyways and also it won't be
    --    recognized without this plugin.
    use { 'wlangstroth/vim-racket' }
+
+   -- Automatically syncing plugins if those were installed at the moment
+   if packer_bootstrap then
+      require('packer').sync()
+   end
 end,
 config = {
    display = {

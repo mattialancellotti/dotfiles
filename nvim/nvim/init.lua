@@ -9,15 +9,6 @@
 local cmd = vim.cmd --  To execute Vim commands
 local opt = vim.opt --  To set options
 
--- This checks whether the given path (packer's installation path) is empty or
--- not. If there is nothing in there than the script proceeds with the
--- installation.
-local exe = vim.fn
-local install_path = exe.stdpath 'data'..'/site/pack/packer/start/packer.nvim'
-if exe.empty(exe.glob(install_path)) > 0 then
-   exe.execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-end
-
 -- Different terminals might have different support for colors.
 -- Recently I have been using 24-bit enabled terminals like Alacritty and
 -- tmux, but I've also tried non-24-bit enabled terminals like GNU Screen and
@@ -86,6 +77,6 @@ map ('n', '<C-T>l', ':tabnext<CR>' )
 map ('n', '<C-T>h', ':tabprev<CR>' )
 
 -- Creating autocmds
-if exe.has('autocmd') then
-   cmd 'source $HOME/.config/nvim/autocmds.vim'
+if vim.fn.has('autocmd') then
+   require('user/autocmds')
 end
