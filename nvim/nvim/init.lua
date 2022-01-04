@@ -76,7 +76,7 @@ map ('n', '<C-T>n', ':tabnew<CR>'  )
 map ('n', '<C-T>l', ':tabnext<CR>' )
 map ('n', '<C-T>h', ':tabprev<CR>' )
 
--- Creating autocmds
-if vim.fn.has('autocmd') then
-   require('user/autocmds')
-end
+-- As far as I know most of this configuration is tied to NeoVim that comes with
+-- all features enabled by default, therefore checking for autocmd feature is
+-- useless.
+require('user/autocmds')
