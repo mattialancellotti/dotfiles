@@ -2,7 +2,9 @@
 STOW = stow
 
 # Collecting all the configuration files in the current directory
-DIRS := $(wildcard dotfiles/*)
+CONFILES = alacritty/ fontconfig/ foot/ hikari/ mpv/ neofetch/ nvim/ pipewire/ screen/ sway/ tmux/ waybar/ wireplumber/
+DOTFILES = home/
+ROOTDIR  = $(wildcard dotfiles/*)
 
 # These are some useful paths needed by stow to actually do its job:
 #   - First we have the `STOWDIR` (or stow directory as referred to by `man
@@ -19,13 +21,10 @@ STOWDIR = $(HOME)/.local/share/stow
 CONFDIR = $(HOME)/.config
 HOMEDIR = $(HOME)
 
-SFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --stow $(2)
-UFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
+SFUNC = $(STOW) --verbose=2 --target=$(1) --dir=$(STOWDIR) --dotfiles --restow $(2)
+UFUNC = $(STOW) --verbose=2 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
 
-INSTALL = $(foreach pkg,$(1),$(shell \
-	  	$(if $(findstring dot-home,$(pkg)), \
-	  		$(call $(2),$(HOMEDIR),$(notdir $(pkg))),\
-			$(call $(2),$(CONFDIR),$(notdir $(pkg))))))
+INSTALL = $(foreach pkg,$(1),$(shell $(call $(2),$(3),$(pkg))))
 
 # Test variables.
 # This variables use the built-in command `command` to check if a program is
@@ -41,12 +40,14 @@ endif
 $(STOWDIR):
 	@echo "Copying your package to the stow directory ($(STOWDIR))."
 	mkdir --parents $(STOWDIR)
-	cp --recursive --verbose $(DIRS) $(STOWDIR)
+	cp --recursive --verbose $(ROOTDIR) $(STOWDIR)
 	@echo "Done."
 
 .PHONY: install uninstall
 install:
-	$(call INSTALL,$(DIRS),SFUNC)
+	$(call INSTALL,$(CONFILES),SFUNC,$(CONFDIR))
+	$(call INSTALL,$(DOTFILES),SFUNC,$(HOMEDIR))
 
 uninstall:
-	$(call INSTALL,$(DIRS),UFUNC)
+	$(call INSTALL,$(CONFILES),UFUNC,$(CONFDIR))
+	$(call INSTALL,$(DOTFILES),UFUNC,$(HOMEDIR))
