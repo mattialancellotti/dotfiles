@@ -19,9 +19,8 @@ STOWDIR = $(HOME)/.local/share/stow
 CONFDIR = $(HOME)/.config
 HOMEDIR = $(HOME)
 
-# Usefull functions
-SFUNC = $(STOW) --verbose=1 --target=$(1) --dir=dotfiles/ --adopt --dotfiles --stow $(2)
-UFUNC = $(STOW) --verbose=1 --target=$(1) --dir=dotfiles/ --adopt --dotfiles --delete $(2)
+SFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --stow $(2)
+UFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
 
 INSTALL = $(foreach pkg,$(1),$(shell \
 	  	$(if $(findstring dot-home,$(pkg)), \
@@ -38,6 +37,12 @@ STOW_CHCK := $(shell command -v $(STOW))
 ifeq ($(STOW_CHCK),)
   $(error The program '$(STOW)' is needed to run this Makefile.)
 endif
+
+$(STOWDIR):
+	@echo "Copying your package to the stow directory ($(STOWDIR))."
+	mkdir --parents $(STOWDIR)
+	cp --recursive --verbose $(DIRS) $(STOWDIR)
+	@echo "Done."
 
 .PHONY: install uninstall
 install:
