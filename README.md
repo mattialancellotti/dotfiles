@@ -1,15 +1,14 @@
-README
-------
+MY DOTFILES
+-----------
 
-# My dotfiles
-## Introduction
+### Introduction
 Not all of my dotfiles are available yet, I'm working on it. Most of these
 programs are not used, like screen, and so they won't be updated.
 
 All of them are free to use you can to whatever you want with them I don't care,
 I'll only be happy to see someone using them.
 
-## Programs
+### Programs
 + [Alacritty](https://alacritty.org)
 + [Foot](https://codeberg.org/dnkl/foot)
 + [Hikari](https://hikari.acmelabs.space)
@@ -22,7 +21,7 @@ I'll only be happy to see someone using them.
 + [Tmux](https://github.com/tmux/tmux)
 + [Waybar](https://github.com/Alexays/Waybar)
 
-## Configuration
+### Configuration
 To automatically manage my dotfiles in a safe way I wrote a makefile that uses
 [GNU Stow](https://www.gnu.org/software/stow/manual/stow.html) to keep them all
 grouped together in one place. To use it you must have GNU Stow installed.
