@@ -21,8 +21,8 @@ STOWDIR = $(HOME)/.local/share/stow
 CONFDIR = $(HOME)/.config
 HOMEDIR = $(HOME)
 
-SFUNC = $(STOW) --verbose=2 --target=$(1) --dir=$(STOWDIR) --dotfiles --restow $(2)
-UFUNC = $(STOW) --verbose=2 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
+SFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --restow $(2)
+UFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
 
 INSTALL = $(foreach pkg,$(1),$(shell $(call $(2),$(3),$(pkg))))
 
