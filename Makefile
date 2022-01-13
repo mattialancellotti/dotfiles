@@ -1,10 +1,15 @@
 # The needed programs
+SHELL = /bin/sh
 STOW = stow
+GZIP = gzip
+TAR  = bsdtar
+RM   = rm --recursive --force
+
 
 # Collecting all the configuration files in the current directory
-CONFILES = alacritty/ fontconfig/ foot/ hikari/ mpv/ neofetch/ nvim/ pipewire/ screen/ sway/ tmux/ waybar/ wireplumber/
-DOTFILES = home/
-ROOTDIR  = $(wildcard dotfiles/*)
+CONFILES := alacritty/ fontconfig/ foot/ hikari/ mpv/ neofetch/ nvim/ pipewire/ screen/ sway/ tmux/ waybar/ wireplumber/
+DOTFILES := home/
+ROOTDIR = dotfiles
 
 # These are some useful paths needed by stow to actually do its job:
 #   - First we have the `STOWDIR` (or stow directory as referred to by `man
@@ -20,6 +25,11 @@ ROOTDIR  = $(wildcard dotfiles/*)
 STOWDIR = $(HOME)/.local/share/stow
 CONFDIR = $(HOME)/.config
 HOMEDIR = $(HOME)
+
+# Configuring flags for creating a distribution archive (.tar.gz)
+TARNAME  = dotfiles-$(shell date +%d%m%Y)
+TARFLAGS = --create --file $(TARNAME)
+ZIPFLAGS = --recursive --synchronous $(TARNAME)
 
 SFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --restow $(2)
 UFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
@@ -37,13 +47,21 @@ ifeq ($(STOW_CHCK),)
   $(error The program '$(STOW)' is needed to run this Makefile.)
 endif
 
+# This is a weird thing for people that are new to Makefiles, it's basically the
+# archive syntax (see GNU Makefile info manual for Archive) archive(items),
+# where $@ is the name of the archive and $% is the name of each item in there.
+#
+# $(ROOTDIR)/*:... alone is not useful because it gets executed once.
+$(ROOTDIR)($(ROOTDIR)/*): $(STOWDIR)
+	cp --recursive --verbose $% $(STOWDIR)
+
 $(STOWDIR):
 	@echo "Copying your package to the stow directory ($(STOWDIR))."
 	mkdir --parents $(STOWDIR)
-	cp --recursive --verbose $(ROOTDIR) $(STOWDIR)
-	@echo "Done."
 
-.PHONY: install uninstall
+.PHONY: all install uninstall dist
+all: install
+
 install:
 	$(call INSTALL,$(CONFILES),SFUNC,$(CONFDIR))
 	$(call INSTALL,$(DOTFILES),SFUNC,$(HOMEDIR))
@@ -51,3 +69,10 @@ install:
 uninstall:
 	$(call INSTALL,$(CONFILES),UFUNC,$(CONFDIR))
 	$(call INSTALL,$(DOTFILES),UFUNC,$(HOMEDIR))
+
+dist:
+	$(TAR) $(TARFLAGS) $(ROOTDIR)/*
+	$(GZIP) $(ZIPFLAGS)
+	$(RM) $(TARNAME)
+
+.DEFAULT: all
