@@ -27,7 +27,7 @@ CONFDIR = $(HOME)/.config
 HOMEDIR = $(HOME)
 
 # Configuring flags for creating a distribution archive (.tar.gz)
-TARNAME  = dotfiles-$(shell date +%d%m%Y)
+TARNAME  = mattia\'s-shitty-dotfiles.tar
 TARFLAGS = --create --file $(TARNAME)
 ZIPFLAGS = --recursive --synchronous $(TARNAME)
 
