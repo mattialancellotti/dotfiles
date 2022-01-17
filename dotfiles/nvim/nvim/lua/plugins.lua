@@ -24,12 +24,6 @@ return require('packer').startup({function()
    use { 'arcticicestudio/nord-vim' }
    use { 'haystackandroid/cosmic_latte' }
 
-   -- Session manager
-   use {
-      'mattialancellotti/simple-session-manager',
-      branch = 'popups'
-   }
-
    -- Galaxy theme for status line
    use { 'itchyny/lightline.vim' }
    
@@ -49,12 +43,19 @@ return require('packer').startup({function()
    --    it's illegal.
    use { 'tpope/vim-fugitive' }
 
-   -- NViM-Tree
+   -- Nvim-Tree
    --    File explorer for neovim written entirely in lua.
    --    This is going to replace netrw
+   --
    use {
       'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons' },
+      config = function()
+         require('nvim-tree').setup({
+            disable_netrw = true,
+            hijack_netrw  = true
+         })
+      end
    }
 
    -- Tresitter
@@ -66,15 +67,6 @@ return require('packer').startup({function()
       run = "TSUpdate",
       config = function()
          local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-         parser_config.make = {
-            install_info = {
-               url = "~/code/tree-sitter-make",
-               files = {"src/parser.c"}
-            },
-            filetype = "make",
-            used_by = {"make"}
-         } 
-
          parser_config.racket = {
             install_info = {
                url = "~/code/tree-sitter-racket",
@@ -101,24 +93,12 @@ return require('packer').startup({function()
       end
    }
 
-   -- Popup library
-   use {
-      'nvim-lua/popup.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-      module = 'popup.nvim'
-   }
-
    -- Vim-Racket
    --    This plugin sets some usefull options automatically when a racket file
    --    get loaded. Because of this you must not lazy-load this on filetype
    --    'racket', since it won't be installed anyways and also it won't be
    --    recognized without this plugin.
    use { 'wlangstroth/vim-racket' }
-
-   -- Automatically syncing plugins if those were installed at the moment
-   if packer_bootstrap then
-      require('packer').sync()
-   end
 end,
 config = {
    display = {
