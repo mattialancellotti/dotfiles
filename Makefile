@@ -7,9 +7,9 @@ RM   = rm --recursive --force
 
 
 # Collecting all the configuration files in the current directory
-CONFILES := $(shell ls -d */)
-DOTFILES := $(shell ls dot-*)
 ROOTDIR = dotfiles
+CONFILES := $(foreach pkg,$(shell ls -d $(ROOTDIR)/*/),$(shell basename $(pkg)))
+DOTFILES := $(foreach pkg,$(shell ls $(ROOTDIR)/dot-*),$(shell basename $(pkg)))
 
 # These are some useful paths needed by stow to actually do its job:
 #   - First we have the `STOWDIR` (or stow directory as referred to by `man
