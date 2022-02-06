@@ -7,9 +7,7 @@ RM   = rm --recursive --force
 
 
 # Collecting all the configuration files in the current directory
-ROOTDIR = dotfiles
-CONFILES := $(foreach pkg,$(shell ls -d $(ROOTDIR)/*/),$(shell basename $(pkg)))
-DOTFILES := $(foreach pkg,$(shell ls $(ROOTDIR)/dot-*),$(shell basename $(pkg)))
+DOTFILES = $(foreach pkg,$(wildcard dotfiles/*),$(shell basename $(pkg)))
 
 # These are some useful paths needed by stow to actually do its job:
 #   - First we have the `STOWDIR` (or stow directory as referred to by `man
@@ -23,21 +21,17 @@ DOTFILES := $(foreach pkg,$(shell ls $(ROOTDIR)/dot-*),$(shell basename $(pkg)))
 # `HOMEDIR`) shouldn't be happening, but it's a way of solving a bug that
 # doesn't get fixed in stow and that is not applying --dotfiles to directories.
 STOWDIR = dotfiles
-CONFDIR = $(HOME)/.config
-HOMEDIR = $(HOME)
+prefix = $(HOME)
 
 # Configuring flags for creating a distribution archive (.tar.gz)
 TARNAME  = mattia\'s-shitty-dotfiles.tar
 TARFLAGS = --create --file $(TARNAME)
 ZIPFLAGS = --recursive --synchronous $(TARNAME)
 
-COMMON_FLAGS = --verbose=1 --dir=$(STOWDIR) --dotfiles
-SFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --restow $(2)
-UFUNC = $(STOW) --verbose=1 --target=$(1) --dir=$(STOWDIR) --dotfiles --delete $(2)
-
-INSTALL = $(foreach pkg,$(1),$(shell $(call $(2),$(3),$(pkg))))
+COMMON_FLAGS = --verbose=1 --target=$(prefix) --dir=$(STOWDIR) --dotfiles
 
 INSTALL_PROGRAM = $(STOW) $(COMMON_FLAGS)
+
 # Test variables.
 # This variables use the built-in command `command` to check if a program is
 # installed or not. The `-v` flag will print the actual pathof the binary.
@@ -52,17 +46,11 @@ endif
 .PHONY: all install uninstall dist
 all: install
 
-install: install_config install_home
-
-install_config:
-	$(INSTALL_PROGRAM) --target=$(CONFDIR) --restow $(CONFILES)
-
-install_home:
-	$(INSTALL_PROGRAM) --target=$(HOMEDIR) --restow $(DOTFILES)
+install:
+	$(INSTALL_PROGRAM) --restow $(DOTFILES)
 
 uninstall:
-	$(call INSTALL,$(CONFILES),UFUNC,$(CONFDIR))
-	$(call INSTALL,$(DOTFILES),UFUNC,$(HOMEDIR))
+	$(INSTALL_PROGRAM) --delete $(DOTFILES)
 
 dist:
 	$(TAR) $(TARFLAGS) $(ROOTDIR)/*
