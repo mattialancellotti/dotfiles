@@ -1,14 +1,21 @@
-window {
+#window {
      margin: 0px;
-     border: 1px solid #FFFFFF;
-     background-color: #282A36;
+     border: 10px;
+     border-radius: 5px;
+     background-color: #344e41;
+}
+
+#outer-box {
+     margin: 5px;
+     border: 1px;
+     border-radius: 5px;
+     background-color: #3a5a40;
 }
 
 #input {
      margin: 5px;
-     border: none;
-     color: #F9F9F2;
-     background-color: #44475A;
+     color: #FFFFFF;
+     background-color: #588157;
 }
 
 #inner-box {
@@ -17,14 +24,8 @@ window {
      background-color: #282A36;
 }
 
-#outer-box {
-     margin: 5px;
-     border: none;
-     background-color: #282A36;
-}
-
 #scroll {
-     margin: 0px;
+     margin: 5px;
      border: none;
 }
 
