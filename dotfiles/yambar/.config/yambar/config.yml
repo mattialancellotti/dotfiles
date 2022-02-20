@@ -1,9 +1,45 @@
+jetbrain: &jetbrain JetBrains Mono:style=Medium:size=12
+awesome: &awesome Font Awesome 5 Free:style=solid:size=12
+
 bar:
   location: top
   height: 26
   background: 00000066
+  border:
+    left-margin: 10
+    right-margin: 10
+    top-margin: 5
+    bottom-margin: 5
+  font: *jetbrain
 
   right:
+    - network:
+        name: wlan0
+        content: {string: {text: , font: *awesome, right-margin: 8}}
     - clock:
+        time-format: "%H:%M %Z"
+        date-format: "%d/%m/%Y"
         content:
-          - string: {text: "{time}"}
+          - string: {text: , font: *awesome}
+          - string: {text: "{date}", right-margin: 8}
+          - string: {text: , font: *awesome}
+          - string: {text: "{time}", right-margin: 8}
+
+  center:
+    - i3:
+        content:
+          current:
+            - string: {text: "{application}"}
+  left:
+    - i3:
+        content:
+          "":
+            map:
+              tag: state
+              default: {string: {text: "{name}", margin: 8}}
+              values:
+                focused:
+                  string:
+                    deco: {underline: {size: 2, color: FFFFFFFF}}
+                    text: "{name}"
+                    margin: 8
