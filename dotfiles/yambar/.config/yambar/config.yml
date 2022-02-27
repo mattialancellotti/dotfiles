@@ -1,5 +1,4 @@
-jetbrain: &jetbrain JetBrains Mono:style=Medium:size=12
-awesome: &awesome Font Awesome 5 Free:style=solid:size=12
+sans: &sans sans
 
 bar:
   location: top
@@ -10,19 +9,24 @@ bar:
     right-margin: 10
     top-margin: 5
     bottom-margin: 5
-  font: *jetbrain
+  font: *sans
 
   right:
     - network:
         name: wlan0
-        content: {string: {text: , font: *awesome, right-margin: 8}}
+        content:
+          map:
+            tag: state
+            values:
+              up: {string: {text: "{ssid}", right-margin: 8}}
+              down: {string: {text: "No internet connection", right-margin: 8}}
     - clock:
         time-format: "%H:%M %Z"
         date-format: "%d/%m/%Y"
         content:
-          - string: {text: , font: *awesome}
+          - string: {text:  }
           - string: {text: "{date}", right-margin: 8}
-          - string: {text: , font: *awesome}
+          - string: {text:  }
           - string: {text: "{time}", right-margin: 8}
 
   center:
