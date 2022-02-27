@@ -121,7 +121,7 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    config = { "\27LJ\2\nâ\3\0\0\5\0\20\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0025\1\a\0005\2\4\0005\3\5\0=\3\6\2=\2\b\0015\2\t\0=\2\n\1=\1\3\0006\1\0\0'\3\v\0B\1\2\0029\1\f\0015\3\14\0005\4\r\0=\4\15\0035\4\16\0=\4\17\0035\4\18\0=\4\19\3D\1\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2\venable\2&additional_vim_regex_highlighting\1\21ensure_installed\1\0\0\1\15\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\fused_by\1\2\0\0\vracket\17install_info\1\0\1\rfiletype\vracket\nfiles\1\2\0\0\17src/parser.c\1\0\1\burl\30~/code/tree-sitter-racket\vracket\23get_parser_configs\28nvim-treesitter.parsers\frequire\0" },
+    config = { "\27LJ\2\n‘\2\0\0\4\0\n\0\f6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2D\0\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\15\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\frequire\0" },
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -171,7 +171,7 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\nâ\3\0\0\5\0\20\0\0256\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0025\1\a\0005\2\4\0005\3\5\0=\3\6\2=\2\b\0015\2\t\0=\2\n\1=\1\3\0006\1\0\0'\3\v\0B\1\2\0029\1\f\0015\3\14\0005\4\r\0=\4\15\0035\4\16\0=\4\17\0035\4\18\0=\4\19\3D\1\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2\venable\2&additional_vim_regex_highlighting\1\21ensure_installed\1\0\0\1\15\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\fused_by\1\2\0\0\vracket\17install_info\1\0\1\rfiletype\vracket\nfiles\1\2\0\0\17src/parser.c\1\0\1\burl\30~/code/tree-sitter-racket\vracket\23get_parser_configs\28nvim-treesitter.parsers\frequire\0", "config", "nvim-treesitter")
+try_loadstring("\27LJ\2\n‘\2\0\0\4\0\n\0\f6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2D\0\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\15\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
@@ -182,5 +182,6 @@ if should_profile then save_profiles() end
 end)
 
 if not no_errors then
+  error_msg = error_msg:gsub('"', '\\"')
   vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end

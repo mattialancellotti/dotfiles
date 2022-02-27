@@ -66,20 +66,10 @@ return require('packer').startup({function()
       'nvim-treesitter/nvim-treesitter',
       run = "TSUpdate",
       config = function()
-         local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-         parser_config.racket = {
-            install_info = {
-               url = "~/code/tree-sitter-racket",
-               files = {"src/parser.c"}
-            },
-            filetype = "racket",
-            used_by = {"racket"}
-         }
-
          return require('nvim-treesitter.configs').setup({
             --Ensuring some languages are installed
             ensure_installed = {
-               "c", "cpp", "java", "dockerfile", "lua", "go", "racket",
+               "c", "cpp", "dockerfile", "lua", "go", "yaml", "json", "html",
                "latex", "python", "vim", "bash", "comment", "make", "commonlisp"
             },
             -- Configuring highlighting for all modules
@@ -92,13 +82,6 @@ return require('packer').startup({function()
          })
       end
    }
-
-   -- Vim-Racket
-   --    This plugin sets some usefull options automatically when a racket file
-   --    get loaded. Because of this you must not lazy-load this on filetype
-   --    'racket', since it won't be installed anyways and also it won't be
-   --    recognized without this plugin.
-   use { 'wlangstroth/vim-racket' }
 end,
 config = {
    display = {
