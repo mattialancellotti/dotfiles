@@ -43,14 +43,20 @@ ifeq ($(STOW_CHCK),)
   $(error The program '$(STOW)' is needed to run this Makefile.)
 endif
 
+# This is a variable the user can set to stow/unstow only some of the dotfiles
+# and not all of them.
+ifeq ($(programs),)
+  programs := $(DOTFILES)
+endif
+
 .PHONY: all install uninstall dist
 all: install
 
 install:
-	$(INSTALL_PROGRAM) --restow $(DOTFILES)
+	$(INSTALL_PROGRAM) --restow $(programs)
 
 uninstall:
-	$(INSTALL_PROGRAM) --delete $(DOTFILES)
+	$(INSTALL_PROGRAM) --delete $(programs)
 
 dist:
 	$(TAR) $(TARFLAGS) $(ROOTDIR)/*
