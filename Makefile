@@ -6,7 +6,13 @@ TAR  = bsdtar
 RM   = rm --recursive --force
 
 
-# Collecting all the configuration files in the current directory
+# Collecting all the configuration files in the current directory.
+# Imma explain it in bash:
+#
+# declare -a DOTFILES;
+# for pkg in $(ls dotfiles/); do
+# 	DOTFILES += $(basename $pkg);
+# done
 DOTFILES = $(foreach pkg,$(wildcard dotfiles/*),$(shell basename $(pkg)))
 
 # These are some useful paths needed by stow to actually do its job:
@@ -34,7 +40,7 @@ INSTALL_PROGRAM = $(STOW) $(COMMON_FLAGS)
 
 # Test variables.
 # This variables use the built-in command `command` to check if a program is
-# installed or not. The `-v` flag will print the actual pathof the binary.
+# installed or not. The `-v` flag will print the actual path of the binary.
 STOW_CHCK := $(shell command -v $(STOW))
 
 # If no output was given, hence no binary was found, throw an error to warn the
@@ -50,8 +56,6 @@ ifeq ($(programs),)
 endif
 
 .PHONY: all install uninstall dist
-all: install
-
 install:
 	$(INSTALL_PROGRAM) --restow $(programs)
 
@@ -63,4 +67,4 @@ dist:
 	$(GZIP) $(ZIPFLAGS)
 	$(RM) $(TARNAME)
 
-.DEFAULT: all
+.DEFAULT: install
