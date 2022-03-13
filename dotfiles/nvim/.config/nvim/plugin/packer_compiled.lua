@@ -121,7 +121,7 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    config = { "\27LJ\2\n‘\2\0\0\4\0\n\0\f6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2D\0\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\15\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\frequire\0" },
+    config = { "\27LJ\2\n”\2\0\0\4\0\n\0\f6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2D\0\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\16\0\0\6c\bcpp\15dockerfile\blua\ago\tyaml\tjson\thtml\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\frequire\0" },
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -160,18 +160,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-racket"] = {
-    loaded = true,
-    path = "/home/mattia/.local/share/nvim/site/pack/packer/start/vim-racket",
-    url = "https://github.com/wlangstroth/vim-racket"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n‘\2\0\0\4\0\n\0\f6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2D\0\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\15\0\0\6c\bcpp\tjava\15dockerfile\blua\ago\vracket\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
+try_loadstring("\27LJ\2\n”\2\0\0\4\0\n\0\f6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\2D\0\2\0\vindent\1\0\1\venable\1\14highlight\1\0\2&additional_vim_regex_highlighting\1\venable\2\21ensure_installed\1\0\0\1\16\0\0\6c\bcpp\15dockerfile\blua\ago\tyaml\tjson\thtml\nlatex\vpython\bvim\tbash\fcomment\tmake\15commonlisp\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)

@@ -6,15 +6,44 @@
 -- SPDX-License-Identifier: MIT
 
 -- Receive script arguments from config.lua
-local config = ...
+local config = ... or {}
 config.roles = config.roles or {}
 
-local pending_rescan = false
+local self = {}
+self.scanning = false
+self.pending_rescan = false
 
-function findRole(role)
+function rescan ()
+  for si in linkables_om:iterate() do
+    handleLinkable (si)
+  end
+end
+
+function scheduleRescan ()
+  if self.scanning then
+    self.pending_rescan = true
+    return
+  end
+
+  self.scanning = true
+  rescan ()
+  self.scanning = false
+
+  if self.pending_rescan then
+    self.pending_rescan = false
+    Core.sync(function ()
+      scheduleRescan ()
+    end)
+  end
+end
+
+function findRole(role, tmc)
   if role and not config.roles[role] then
+    -- find the role with matching alias
     for r, p in pairs(config.roles) do
-      if type(p.alias) == "table" then
+      -- default media class can be overridden in the role config data
+      mc = p["media.class"] or "Audio/Sink"
+      if (type(p.alias) == "table" and tmc == mc) then
         for i = 1, #(p.alias), 1 do
           if role == p.alias[i] then
             return r
@@ -22,11 +51,24 @@ function findRole(role)
         end
       end
     end
+
+    -- otherwise get the lowest priority role
+    local lowest_priority_p = nil
+    local lowest_priority_r = nil
+    for r, p in pairs(config.roles) do
+      mc = p["media.class"] or "Audio/Sink"
+      if tmc == mc and (lowest_priority_p == nil or
+          p.priority < lowest_priority_p.priority) then
+        lowest_priority_p = p
+        lowest_priority_r = r
+      end
+    end
+    return lowest_priority_r
   end
   return role
 end
 
-function findTargetEndpoint (node, media_class)
+function findTargetEndpoint (node, media_class, role)
   local target_class_assoc = {
     ["Stream/Input/Audio"] = "Audio/Source",
     ["Stream/Output/Audio"] = "Audio/Sink",
@@ -43,7 +85,7 @@ function findTargetEndpoint (node, media_class)
   end
 
   -- find highest priority endpoint by role
-  media_role = findRole(node.properties["media.role"])
+  media_role = findRole(role, target_media_class)
   for si_target_ep in endpoints_om:iterate {
     Constraint { "role", "=", media_role, type = "pw-global" },
     Constraint { "media.class", "=", target_media_class, type = "pw-global" },
@@ -112,8 +154,7 @@ function checkLinkable (si)
   end
 
   -- Determine if we can handle item by this policy
-  local media_role = node.properties["media.role"]
-  if endpoints_om:get_n_objects () == 0 or media_role == nil then
+  if endpoints_om:get_n_objects () == 0 then
     Log.debug (si, "item won't be handled by this policy")
     return false
   end
@@ -128,12 +169,12 @@ function handleLinkable (si)
 
   local node = si:get_associated_proxy ("node")
   local media_class = node.properties["media.class"] or ""
-  local media_role = node.properties["media.role"] or ""
+  local media_role = node.properties["media.role"] or "Default"
   Log.info (si, "handling item " .. tostring(node.properties["node.name"]) ..
       " with role " .. media_role)
 
   -- find proper target endpoint
-  local si_target_ep = findTargetEndpoint (node, media_class)
+  local si_target_ep = findTargetEndpoint (node, media_class, media_role)
   if not si_target_ep then
     Log.info (si, "... target endpoint not found")
     return
@@ -158,7 +199,7 @@ function handleLinkable (si)
             link:remove ()
             Log.info (si, "... moving to new target")
           else
-            pending_rescan = true
+            scheduleRescan ()
             Log.info (si, "... scheduled rescan")
             return
           end
@@ -191,25 +232,11 @@ function unhandleLinkable (si)
   end
 end
 
-function rescan ()
-  for si in linkables_om:iterate() do
-    handleLinkable (si)
-  end
-
-  -- if pending_rescan, re-evaluate after sync
-  if pending_rescan then
-    pending_rescan = false
-    Core.sync (function (c)
-      rescan()
-    end)
-  end
-end
-
 endpoints_om = ObjectManager { Interest { type = "SiEndpoint" }}
 linkables_om = ObjectManager { Interest { type = "SiLinkable",
   -- only handle si-audio-adapter and si-node
   Constraint {
-    "item.factory.name", "c", "si-audio-adapter", "si-node", type = "pw-global" },
+    "item.factory.name", "=", "si-audio-adapter", type = "pw-global" },
   }
 }
 links_om = ObjectManager { Interest { type = "SiLink",
@@ -218,7 +245,7 @@ links_om = ObjectManager { Interest { type = "SiLink",
 } }
 
 linkables_om:connect("objects-changed", function (om)
-  rescan ()
+  scheduleRescan ()
 end)
 
 linkables_om:connect("object-removed", function (om, si)

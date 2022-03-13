@@ -125,12 +125,16 @@ function createDevice(parent, id, type, factory, properties)
 
   -- create the device
   local device = SpaDevice(factory, properties)
-  device:connect("create-object", createNode)
-  device:activate(Feature.SpaDevice.ENABLED | Feature.Proxy.BOUND)
-  parent:store_managed_object(id, device)
+  if device then
+    device:connect("create-object", createNode)
+    device:activate(Feature.SpaDevice.ENABLED | Feature.Proxy.BOUND)
+    parent:store_managed_object(id, device)
+  else
+    Log.warning ("Failed to create '" .. factory .. "' device")
+  end
 end
 
-monitor = SpaDevice("api.libcamera.enum.client", config.properties or {})
+monitor = SpaDevice("api.libcamera.enum.manager", config.properties or {})
 if monitor then
   monitor:connect("create-object", createDevice)
   monitor:activate(Feature.SpaDevice.ENABLED)

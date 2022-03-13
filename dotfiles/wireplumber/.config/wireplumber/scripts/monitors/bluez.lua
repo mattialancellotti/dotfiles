@@ -104,13 +104,21 @@ function createDevice(parent, id, type, factory, properties)
     end
     properties["device.name"] = name
 
+    -- initial profile is to be set by m-device-activation, not spa-bluez5
+    properties["bluez5.profile"] = "off"
+
     -- apply properties from config.rules
     rulesApplyProperties(properties)
 
     -- create the device
     device = SpaDevice(factory, properties)
-    device:connect("create-object", createNode)
-    parent:store_managed_object(id, device)
+    if device then
+      device:connect("create-object", createNode)
+      parent:store_managed_object(id, device)
+    else
+      Log.warning ("Failed to create '" .. factory .. "' device")
+      return
+    end
   end
 
   Log.info(parent, string.format("%d, %s (%s): %s",

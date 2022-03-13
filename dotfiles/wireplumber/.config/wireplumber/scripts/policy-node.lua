@@ -6,13 +6,39 @@
 -- SPDX-License-Identifier: MIT
 
 -- Receive script arguments from config.lua
-local config = ...
+local config = ... or {}
 
 -- ensure config.move and config.follow are not nil
 config.move = config.move or false
 config.follow = config.follow or false
 
-local pending_rescan = false
+local self = {}
+self.scanning = false
+self.pending_rescan = false
+
+function rescan()
+  for si in linkables_om:iterate() do
+    handleLinkable (si)
+  end
+end
+
+function scheduleRescan ()
+  if self.scanning then
+    self.pending_rescan = true
+    return
+  end
+
+  self.scanning = true
+  rescan ()
+  self.scanning = false
+
+  if self.pending_rescan then
+    self.pending_rescan = false
+    Core.sync(function ()
+      scheduleRescan ()
+    end)
+  end
+end
 
 function parseBool(var)
   return var and (var:lower() == "true" or var == "1")
@@ -82,12 +108,16 @@ function createLink (si, si_target, passthrough, exclusive)
   -- activate
   si_link:activate (Feature.SessionItem.ACTIVE, function (l, e)
     if e then
-      Log.warning (l, "failed to activate si-standard-link: " .. tostring(e))
-      si_flags[si_id].peer_id = nil
+      Log.info (l, "failed to activate si-standard-link: " .. tostring(e))
+      if si_flags[si_id] ~= nil then
+        si_flags[si_id].peer_id = nil
+      end
       l:remove ()
     else
-      si_flags[si_id].failed_peer_id = nil
-      si_flags[si_id].failed_count = 0
+      if si_flags[si_id] ~= nil then
+        si_flags[si_id].failed_peer_id = nil
+        si_flags[si_id].failed_count = 0
+      end
       Log.info (l, "activated si-standard-link")
     end
   end)
@@ -262,9 +292,112 @@ function findDefinedTarget (properties)
   return nil
 end
 
--- User or client defined target is not available, Loop through all the valid
--- linkables(nodes) and pick an appropriate one.
-function findUndefinedTarget (si)
+function parseParam(param, id)
+  local route = param:parse()
+  if route.pod_type == "Object" and route.object_id == id then
+    return route.properties
+  else
+    return nil
+  end
+end
+
+function arrayContains(a, value)
+  for _, v in ipairs(a) do
+    if v == value then
+      return true
+    end
+  end
+  return false
+end
+
+
+-- Does the target device have any active/available paths/routes to
+-- the physical device(spkr/mic/cam)?
+function haveAvailableRoutes (si_props)
+  local card_profile_device = si_props["card.profile.device"]
+  local device_id = si_props["device.id"]
+  local device = device_id and devices_om:lookup {
+    Constraint { "bound-id", "=", device_id, type = "gobject"},
+  }
+
+  if not card_profile_device or not device then
+    return true
+  end
+
+  local found = 0
+  local avail = 0
+
+  -- First check "SPA_PARAM_Route" if there are any active devices
+  -- in an active profile.
+  for p in device:iterate_params("Route") do
+    local route = parseParam(p, "Route")
+    if not route then
+      goto skip_route
+    end
+
+    if (route.device ~= tonumber(card_profile_device)) then
+      goto skip_route
+    end
+
+    if (route.available == "no") then
+      return false
+    end
+
+    do return true end
+
+    ::skip_route::
+  end
+
+  -- Second check "SPA_PARAM_EnumRoute" if there is any route that
+  -- is available if not active.
+  for p in device:iterate_params("EnumRoute") do
+    local route = parseParam(p, "EnumRoute")
+    if not route then
+      goto skip_enum_route
+    end
+
+    if not arrayContains(route.devices, tonumber(card_profile_device)) then
+      goto skip_enum_route
+    end
+    found = found + 1;
+    if (route.available ~= "no") then
+      avail = avail +1
+    end
+    ::skip_enum_route::
+  end
+
+  if found == 0 then
+    return true
+  end
+  if avail > 0 then
+    return true
+  end
+
+  return false
+
+end
+
+function findDefaultLinkable (si)
+  local si_props = si.properties
+  local target_direction = getTargetDirection(si_props)
+  local def_node_id = getDefaultNode(si_props, target_direction)
+  return linkables_om:lookup {
+      Constraint { "node.id", "=", tostring(def_node_id) }
+  }
+end
+
+function checkPassthroughCompatibility (si, si_target)
+  local si_must_passthrough = parseBool(si.properties["item.node.encoded-only"])
+  local si_target_must_passthrough = parseBool(si_target.properties["item.node.encoded-only"])
+  local can_passthrough = canPassthrough(si, si_target)
+  if (si_must_passthrough or si_target_must_passthrough)
+      and not can_passthrough then
+    return false, can_passthrough
+  end
+  return true, can_passthrough
+end
+
+function findBestLinkable (si)
   local si_props = si.properties
   local target_direction = getTargetDirection(si_props)
   local target_picked = nil
@@ -279,6 +412,7 @@ function findUndefinedTarget (si)
   } do
     local si_target_props = si_target.properties
     local si_target_node_id = si_target_props["node.id"]
+    local priority = tonumber(si_target_props["priority.session"]) or 0
 
     Log.debug(string.format("Looking at: %s (%s)",
         tostring(si_target_props["node.name"]),
@@ -289,28 +423,15 @@ function findUndefinedTarget (si)
       goto skip_linkable
     end
 
-    local priority = tonumber(si_target_props["priority.session"]) or 0
-
-    -- Is this linkable(node) a default one?
-    local def_node_id = getDefaultNode(si_props, target_direction)
-    if tostring(def_node_id) == si_target_node_id then
-      Log.debug(string.format("... this (%s) is the default node for %s",
-          def_node_id, target_direction))
-      priority = priority + 10000
+    if not haveAvailableRoutes(si_target_props) then
+      Log.debug("... does not have routes, skip linkable")
+      goto skip_linkable
     end
 
-    -- todo:check if this linkable(node/device) have valid routes.
-
-    -- Is passthrough feasible between these linkables(nodes)?
-    local si_must_passthrough = parseBool(si_props["item.node.encoded-only"])
-    local si_target_must_passthrough = parseBool(si_target_props["item.node.encoded-only"])
-    local can_passthrough = canPassthrough(si, si_target)
-
-    if (si_must_passthrough or si_target_must_passthrough)
-        and not can_passthrough then
-      Log.debug(string.format("... cannot passthrough, skip; must:%s target_must:%s",
-          tostring(si_must_passthrough),
-          tostring(si_target_must_passthrough)))
+    local passthrough_compatible, can_passthrough =
+        checkPassthroughCompatibility (si, si_target)
+    if not passthrough_compatible then
+      Log.debug("... passthrough is not compatible, skip linkable")
       goto skip_linkable
     end
 
@@ -336,7 +457,7 @@ function findUndefinedTarget (si)
   end
 
   if target_picked then
-    Log.info(string.format("... target: %s (%s), can_passthrough:%s",
+    Log.info(string.format("... best target picked: %s (%s), can_passthrough:%s",
       tostring(target_picked.properties["node.name"]),
       tostring(target_picked.properties["node.id"]),
       tostring(target_can_passthrough)))
@@ -345,6 +466,32 @@ function findUndefinedTarget (si)
     return nil, nil
   end
 
+end
+
+function findUndefinedTarget (si)
+  -- Just find the best linkable if default nodes module is not loaded
+  if default_nodes == nil then
+    return findBestLinkable (si)
+  end
+
+  -- Otherwise find the default linkable. If the default linkable is not
+  -- compatible, we find the best one instead. We return nil if the default
+  -- linkable does not exist.
+  local si_target = findDefaultLinkable (si)
+  if si_target then
+    local passthrough_compatible, can_passthrough =
+        checkPassthroughCompatibility (si, si_target)
+    if canLink (si.properties, si_target) and passthrough_compatible then
+      Log.info(string.format("... default target picked: %s (%s), can_passthrough:%s",
+        tostring(si_target.properties["node.name"]),
+        tostring(si_target.properties["node.id"]),
+        tostring(can_passthrough)))
+      return si_target, can_passthrough
+    else
+      return findBestLinkable (si)
+    end
+  end
+  return nil, nil
 end
 
 function lookupLink (si_id, si_target_id)
@@ -369,8 +516,8 @@ function checkLinkable(si)
   end
 
   -- Determine if we can handle item by this policy
-  local media_role = si_props["media.role"]
-  if endpoints_om:get_n_objects () > 0 and media_role ~= nil then
+  if endpoints_om:get_n_objects () > 0 and
+      si_props["item.factory.name"] == "si-audio-adapter" then
     return false
   end
 
@@ -413,25 +560,16 @@ function handleLinkable (si)
     si_target = nil
   end
 
-  -- wait up to 2 seconds for the requested target to become available
-  -- this is because the client may have already "seen" a target that we haven't
-  -- yet prepared, which leads to a race condition
+  -- if the client has seen a target that we haven't yet prepared, schedule
+  -- a rescan one more time and hope for the best
   local si_id = si.id
   if si_props["node.target"] and si_props["node.target"] ~= "-1"
       and not si_target
       and not si_flags[si_id].was_handled
       and not si_flags[si_id].done_waiting then
-    if not si_flags[si_id].timeout_source then
-      si_flags[si_id].timeout_source = Core.timeout_add(2000, function()
-        if si_flags[si_id] then
-          si_flags[si_id].done_waiting = true
-          si_flags[si_id].timeout_source = nil
-          rescan()
-        end
-        return false
-      end)
-    end
     Log.info (si, "... waiting for target")
+    si_flags[si_id].done_waiting = true
+    scheduleRescan()
     return
   end
 
@@ -455,7 +593,7 @@ function handleLinkable (si)
           link:remove ()
           Log.info (si, "... moving to new target")
         else
-          pending_rescan = true
+          scheduleRescan()
           Log.info (si, "... scheduled rescan")
           return
         end
@@ -544,20 +682,6 @@ function unhandleLinkable (si)
   si_flags[si.id] = nil
 end
 
-function rescan()
-  for si in linkables_om:iterate() do
-    handleLinkable (si)
-  end
-
-  -- if pending_rescan, re-evaluate after sync
-  if pending_rescan then
-    pending_rescan = false
-    Core.sync (function (c)
-      rescan()
-    end)
-  end
-end
-
 default_nodes = Plugin.find("default-nodes-api")
 
 metadata_om = ObjectManager {
@@ -570,6 +694,9 @@ metadata_om = ObjectManager {
 endpoints_om = ObjectManager { Interest { type = "SiEndpoint" } }
 
 clients_om = ObjectManager { Interest { type = "client" } }
+
+devices_om = ObjectManager { Interest { type = "device" } }
+
 
 linkables_om = ObjectManager {
   Interest {
@@ -589,7 +716,7 @@ links_om = ObjectManager {
 
 function cleanupTargetNodeMetadata()
   local metadata = metadata_om:lookup()
-  if metadata then
+  if metadata and default_nodes ~= nil then
     local to_remove = {}
     for s, k, t, v in metadata:iterate(Id.ANY) do
       if k == "target.node" then
@@ -616,10 +743,10 @@ function cleanupTargetNodeMetadata()
 end
 
 -- listen for default node changes if config.follow is enabled
-if config.follow then
+if config.follow and default_nodes ~= nil then
   default_nodes:connect("changed", function ()
     cleanupTargetNodeMetadata()
-    rescan()
+    scheduleRescan ()
   end)
 end
 
@@ -628,18 +755,31 @@ if config.move then
   metadata_om:connect("object-added", function (om, metadata)
     metadata:connect("changed", function (m, subject, key, t, value)
       if key == "target.node" then
-        rescan()
+        scheduleRescan ()
       end
     end)
   end)
 end
 
-linkables_om:connect("objects-changed", function (om)
-  rescan()
+linkables_om:connect("object-added", function (om, si)
+  if si.properties["item.node.type"] ~= "stream" then
+    scheduleRescan ()
+  else
+    handleLinkable (si)
+  end
 end)
 
 linkables_om:connect("object-removed", function (om, si)
   unhandleLinkable (si)
+  if si.properties["item.node.type"] ~= "stream" then
+    scheduleRescan ()
+  end
+end)
+
+devices_om:connect("object-added", function (om, device)
+  device:connect("params-changed", function (d, param_name)
+    scheduleRescan ()
+  end)
 end)
 
 metadata_om:activate()
@@ -647,3 +787,4 @@ endpoints_om:activate()
 clients_om:activate()
 linkables_om:activate()
 links_om:activate()
+devices_om:activate()

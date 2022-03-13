@@ -6,7 +6,7 @@
 -- SPDX-License-Identifier: MIT
 
 -- Receive script arguments from config.lua
-local config = ...
+local config = ... or {}
 
 -- ensure config.properties is not nil
 config.properties = config.properties or {}
@@ -168,6 +168,9 @@ function createNode(parent, id, type, factory, properties)
 
   -- apply properties from config.rules
   rulesApplyProperties(properties)
+  if properties["node.disabled"] then
+    return
+  end
 
   -- create the node
   local node = Node("adapter", properties)
@@ -177,9 +180,13 @@ end
 
 function createDevice(parent, id, factory, properties)
   local device = SpaDevice(factory, properties)
-  device:connect("create-object", createNode)
-  device:activate(Feature.SpaDevice.ENABLED | Feature.Proxy.BOUND)
-  parent:store_managed_object(id, device)
+  if device then
+    device:connect("create-object", createNode)
+    device:activate(Feature.SpaDevice.ENABLED | Feature.Proxy.BOUND)
+    parent:store_managed_object(id, device)
+  else
+    Log.warning ("Failed to create '" .. factory .. "' device")
+  end
 end
 
 function prepareDevice(parent, id, type, factory, properties)
@@ -250,6 +257,9 @@ function prepareDevice(parent, id, type, factory, properties)
 
   -- apply properties from config.rules
   rulesApplyProperties(properties)
+  if properties["device.disabled"] then
+    return
+  end
 
   -- override the device factory to use ACP
   if properties["api.alsa.use-acp"] then
@@ -315,7 +325,7 @@ function createMonitor ()
   local m = SpaDevice("api.alsa.enum.udev", config.properties)
   if m == nil then
     Log.message("PipeWire's SPA ALSA udev plugin(\"api.alsa.enum.udev\")"
-      .. "missing or broken. Sound Cards Cannot be enumerated")
+      .. "missing or broken. Sound Cards cannot be enumerated")
     return nil
   end
 
