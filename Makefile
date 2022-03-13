@@ -34,7 +34,19 @@ TARNAME  = mattia\'s-shitty-dotfiles.tar
 TARFLAGS = --create --file $(TARNAME)
 ZIPFLAGS = --recursive --synchronous $(TARNAME)
 
-COMMON_FLAGS = --verbose=1 --target=$(prefix) --dir=$(STOWDIR) --dotfiles
+# Gotta check some flags
+# This is a variable the user can set to stow/unstow only some of the dotfiles
+# and not all of them.
+ifeq ($(programs),)
+  programs := $(DOTFILES)
+endif
+
+# While this determines the stow's level of verbosity 
+ifeq ($(verbosity),)
+  verbosity = 1
+endif
+
+COMMON_FLAGS = --verbose=$(verbosity) --target=$(prefix) --dir=$(STOWDIR) --dotfiles
 
 INSTALL_PROGRAM = $(STOW) $(COMMON_FLAGS)
 
@@ -49,11 +61,6 @@ ifeq ($(STOW_CHCK),)
   $(error The program '$(STOW)' is needed to run this Makefile.)
 endif
 
-# This is a variable the user can set to stow/unstow only some of the dotfiles
-# and not all of them.
-ifeq ($(programs),)
-  programs := $(DOTFILES)
-endif
 
 .PHONY: all install uninstall dist
 install:
