@@ -46,6 +46,7 @@ ifeq ($(verbosity),)
   verbosity = 1
 endif
 
+# Commong flags needed every time stow runs
 COMMON_FLAGS = --verbose=$(verbosity) --target=$(prefix) --dir=$(STOWDIR) --dotfiles
 
 INSTALL_PROGRAM = $(STOW) $(COMMON_FLAGS)
