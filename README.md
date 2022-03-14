@@ -14,7 +14,7 @@ read it.
 ### Programs
 + [Alacritty](https://alacritty.org)
 + [Foot](https://codeberg.org/dnkl/foot)
-+ [FontConfig](://www.freedesktop.org/wiki/Software/fontconfig/)
++ [FontConfig](https://www.freedesktop.org/wiki/Software/fontconfig/)
 + [Hikari](https://hikari.acmelabs.space)
 + [MPV](https://mpv.io)
 + [Neofetch](https://github.com/dylanaraps/neofetch)
