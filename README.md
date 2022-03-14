@@ -14,6 +14,7 @@ read it.
 ### Programs
 + [Alacritty](https://alacritty.org)
 + [Foot](https://codeberg.org/dnkl/foot)
++ [FontConfig](://www.freedesktop.org/wiki/Software/fontconfig/)
 + [Hikari](https://hikari.acmelabs.space)
 + [MPV](https://mpv.io)
 + [Neofetch](https://github.com/dylanaraps/neofetch)
@@ -23,6 +24,8 @@ read it.
 + [Sway](https://swaywm.org)
 + [Tmux](https://github.com/tmux/tmux)
 + [Waybar](https://github.com/Alexays/Waybar)
++ [Wofi](https://hg.sr.ht/~scoopta/wofi)
++ [Yambar](https://codeberg.org/dnkl/yambar)
 
 ### Configuration
 To automatically manage my dotfiles in a safe way I wrote a makefile that uses
