@@ -70,7 +70,7 @@ return require('packer').startup({function()
             --Ensuring some languages are installed
             ensure_installed = {
                "c", "cpp", "dockerfile", "lua", "go", "yaml", "json", "html",
-               "latex", "python", "vim", "bash", "comment", "make", "commonlisp"
+               "latex", "python", "vim", "comment", "make", "commonlisp"
             },
             -- Configuring highlighting for all modules
             highlight = {
