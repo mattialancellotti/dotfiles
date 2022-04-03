@@ -4,7 +4,6 @@ MY DOTFILES
 ### Introduction
 Not all of my dotfiles are available yet, some of them are a work in
 progress.  
-Most of these programs are not used, like screen, and so they won't be updated.  
 All of them are free to use you can do whatever you want with them I don't care,
 I'll only be happy to see someone using them.  
 In case you want to understand how the whole automating dotfiles deployment thingy
