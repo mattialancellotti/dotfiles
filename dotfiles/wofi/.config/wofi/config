@@ -1,0 +1,6 @@
+width=20%
+height=30%
+location=2
+
+key_down=Control_L-n
+key_up=Control_L-p
