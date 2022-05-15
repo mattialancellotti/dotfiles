@@ -2,33 +2,25 @@
      margin: 0px;
      border: 0px;
      border-radius: 5px;
-     background-color: #282929;
+     background-color: #0C0E14;
 }
 
 #outer-box {
      margin: 0px;
      border-radius: 5px;
-     background-color: #282929;
+     background-color: #0C0E14;
 }
 
 #input {
      margin: 5px;
-     background-color: #282929;
-     color: #d9d9d9;
-}
-
-#input:#selected {
-     margin: 5px;
-     background-color: #282929;
+     color: white;
+     background-color: #0C0E14;
 }
 
 #inner-box {
      margin: 5px;
      border: none;
-     background-color: #282929;
-}
-
-#scroll {
+     background-color: #0C0E14;
 }
 
 #text {
@@ -39,5 +31,5 @@
 
 #entry:selected {
      border-radius: 5px;
-     background-color: #282929;
+     background-color: #0C0E14;
 }
