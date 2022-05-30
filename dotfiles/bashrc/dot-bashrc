@@ -19,7 +19,7 @@ MANPAGER="nvim +Man!"
 
 export MAILDIR="$HOME/.local/share/mails"
 export GOPATH="$HOME/.local/share/go"
-export UTILITIES="$HOME/.local/bin/dotfiles"
+export UTILITIES="$HOME/code/utilities/tools"
 export SCREENRC="$HOME/.config/screen/screenrc"
 #export GDK_BACKEND=wayland
 #export QT_QPA_PLATFORM=wayland
