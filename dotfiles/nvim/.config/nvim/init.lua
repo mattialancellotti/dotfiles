@@ -80,3 +80,4 @@ map ('n', '<C-T>h', ':tabprev<CR>' )
 -- all features enabled by default, therefore checking for autocmd feature is
 -- useless.
 require('user/autocmds')
+require('user/nvim-tree')     -- nvim-tree configuration

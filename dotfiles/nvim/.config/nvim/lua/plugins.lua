@@ -14,14 +14,13 @@ return require('packer').startup({function()
    use { 'wbthomason/packer.nvim' }
 
    -- My hundreds of colorschemes
-   use { 'sjl/badwolf' }
-   use { 'savq/melange' }
-   use { 'doums/darcula' }
+   use { 'sainnhe/edge' }
+   use { 'rafamadriz/neon' }
+   use { 'embark-theme/vim' }
    use { 'sainnhe/everforest' }
-   use { 'brettbar/siena.vim' }
    use { 'cocopon/iceberg.vim' }
-   use { 'kadekillary/Turtles' }
    use { 'arcticicestudio/nord-vim' }
+   use { 'sainnhe/gruvbox-material' }
    use { 'haystackandroid/cosmic_latte' }
 
    -- Galaxy theme for status line
@@ -46,17 +45,7 @@ return require('packer').startup({function()
    -- Nvim-Tree
    --    File explorer for neovim written entirely in lua.
    --    This is going to replace netrw
-   --
-   use {
-      'kyazdani42/nvim-tree.lua',
-      requires = { 'kyazdani42/nvim-web-devicons' },
-      config = function()
-         require('nvim-tree').setup({
-            disable_netrw = true,
-            hijack_netrw  = true
-         })
-      end
-   }
+   use { 'kyazdani42/nvim-tree.lua' }
 
    -- Tresitter
    --    Neovim plugin that improves highlighting, indentation and some other
@@ -69,8 +58,8 @@ return require('packer').startup({function()
          return require('nvim-treesitter.configs').setup({
             --Ensuring some languages are installed
             ensure_installed = {
-               "c", "cpp", "dockerfile", "lua", "go", "yaml", "json", "html",
-               "latex", "python", "vim", "comment", "make", "commonlisp"
+               "c", "cpp", "dockerfile", "lua", "go", "gomod", "yaml", "json",
+               "html", "latex", "python", "vim", "comment", "make"
             },
             -- Configuring highlighting for all modules
             highlight = {
