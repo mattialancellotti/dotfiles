@@ -20,8 +20,8 @@ require('nvim-tree').setup({
                open = "<",
                arrow_open = "-",
                default = ">",
-               empty = "<>",
-               empty_open = "<>",
+               empty = "E",
+               empty_open = "E",
                symlink = "->",
                symlink_open = "->"
             },
@@ -36,3 +36,5 @@ require('nvim-tree').setup({
       }
    }
 })
+
+vim.notify('nvim-tree configuration loaded.')

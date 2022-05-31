@@ -22,10 +22,13 @@ return require('packer').startup({function()
    use { 'arcticicestudio/nord-vim' }
    use { 'sainnhe/gruvbox-material' }
    use { 'haystackandroid/cosmic_latte' }
+   use { 'frenzyexists/aquarium-vim' }
+   use { 'catppuccin/nvim' }
 
    -- Galaxy theme for status line
    use { 'itchyny/lightline.vim' }
-   
+   use { 'nvim-lualine/lualine.nvim' }
+
    -- Telescope:
    --   A plugin for fuzzy finding stuff (especially files). It's written in
    --   lua and requires 2 libraries from the nvim-lua git repository:
@@ -47,30 +50,15 @@ return require('packer').startup({function()
    --    This is going to replace netrw
    use { 'kyazdani42/nvim-tree.lua' }
 
+   -- TODO: Need to configure LSP
+   use { 'simrat39/symbols-outline.nvim' }
+   use { 'rcarriga/nvim-notify' }
+
    -- Tresitter
    --    Neovim plugin that improves highlighting, indentation and some other
    --    thing. As far as I know it will be integrated in neovim in a future
    --    version.
-   use {
-      'nvim-treesitter/nvim-treesitter',
-      run = "TSUpdate",
-      config = function()
-         return require('nvim-treesitter.configs').setup({
-            --Ensuring some languages are installed
-            ensure_installed = {
-               "c", "cpp", "dockerfile", "lua", "go", "gomod", "yaml", "json",
-               "html", "latex", "python", "vim", "comment", "make"
-            },
-            -- Configuring highlighting for all modules
-            highlight = {
-               enable = true,
-               additional_vim_regex_highlighting = false
-            },
-            -- Disabling indentation
-            indent = { enable = false }
-         })
-      end
-   }
+   use { 'nvim-treesitter/nvim-treesitter', run = "TSUpdate" }
 end,
 config = {
    display = {

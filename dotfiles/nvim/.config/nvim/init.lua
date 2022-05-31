@@ -9,6 +9,7 @@
 local cmd = vim.cmd --  To execute Vim commands
 local opt = vim.opt --  To set options
 
+
 -- Different terminals might have different support for colors.
 -- Recently I have been using 24-bit enabled terminals like Alacritty and
 -- tmux, but I've also tried non-24-bit enabled terminals like GNU Screen and
@@ -47,8 +48,11 @@ opt.showmode = false
 -- Loading plugins
 require('plugins')
 
+-- Using notify plugin as notification manager
+vim.notify = require('notify')
+
 --  Color scheme
-cmd 'colorscheme everforest'
+cmd 'colorscheme catppuccin'
 
 -- Loading mappings
 local map = require('config').map
@@ -80,4 +84,5 @@ map ('n', '<C-T>h', ':tabprev<CR>' )
 -- all features enabled by default, therefore checking for autocmd feature is
 -- useless.
 require('user/autocmds')
-require('user/nvim-tree')     -- nvim-tree configuration
+require('user/nvim-tree')        -- nvim-tree configuration
+require('user/nvim-treesitter')  -- nvim-treesitter configuration
