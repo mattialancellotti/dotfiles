@@ -2,6 +2,16 @@ require('nvim-tree').setup({
    disable_netrw = true,         -- Disabling the default file browser
    open_on_setup = true,         -- Opening nvim-tree if current buf is empty
    hijack_cursor = true,         -- Keep cursor on first letter
+   view = {
+      mappings = {
+         custom_only = false,
+         -- Custom mappings
+         list = {
+            { key = 'l', action = "edit" },
+            { key = 'h', aciton = "close_node" }
+         }
+      }
+   },
    renderer = {
       highlight_opened_files = "name",
       icons = {
@@ -36,5 +46,6 @@ require('nvim-tree').setup({
       }
    }
 })
+
 
 vim.notify('nvim-tree configuration loaded.')
