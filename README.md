@@ -42,4 +42,5 @@ some examples you can try to better understand this functionality:
 If you want to distribute your dotfiles once you've modified them, you can run `make dist`.
 
 ### Current setup
-![Setup](./doc/setup.png)
+![Setup image](/doc/setup.png)
+![NeoVim](/doc/neovim.png)
