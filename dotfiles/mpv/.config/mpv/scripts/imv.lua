@@ -83,5 +83,12 @@ evnt_set("file-loaded", (function(event)
       bind_key('L', (function() update("video-pan-x", -0.01) end))
       bind_key('J', (function() update("video-pan-y", -0.01) end))
       bind_key('K', (function() update("video-pan-y",  0.01) end))
+
+      -- Other bindings
+      bind_key('d', (function()
+         -- Removing the file from the playlist and then deleting it
+         mp.command("playlist-remove current")
+         os.execute("rm -rf "..prop_get("path"))
+      end))
    end
 end))
