@@ -52,6 +52,9 @@ return require('packer').startup({function()
 
    -- TODO: Need to configure LSP
    use { 'simrat39/symbols-outline.nvim' }
+
+   -- Notify
+   --    Notification plug-in for neovim.
    use { 'rcarriga/nvim-notify' }
 
    -- Tresitter
