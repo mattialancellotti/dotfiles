@@ -8,11 +8,11 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: rgba(43, 48, 59, 0);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 2px;
 }
 
@@ -20,15 +20,9 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
 window#waybar.empty {
     background-color: transparent;
 }
-
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 window#waybar.termite {
     background-color: #3F3F3F;
@@ -39,21 +33,27 @@ window#waybar.chromium {
     border: none;
 }
 
+/* General layout for the modules in the center */
+.modules-center {
+     padding: 5px;
+     border-radius: 5px;
+     background-color: rgba(43, 48, 59, 0.5);
+}
+
 #workspaces button {
-    margin: 3px 0 5px 10px;
-    padding: 0px 0px 0px 0px;
-    border-radius: 2px;
-    background-color: transparent;
-    color: white;
+     padding: 4px 4px 4px 4px;
+     color: white;
 }
 
 #workspaces button.focused {
     background-color: transparent;
-    border-bottom: 2px solid;
+    color: red;
 }
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+.modules-right {
+     padding: 5px;
+     border-radius: 5px;
+     background-color: rgba(43, 48, 59, 0.5);
 }
 
 #mode {
@@ -76,8 +76,8 @@ window#waybar.chromium {
 #language,
 #idle_inhibitor,
 #mpd {
-    padding: 0 5px;
-    margin: 5px 5px 5px 0px;
+    padding: 0 10px;
+    margin: 1px 1px 1px 1px;
     color: #ffffff;
     border-radius: 2px;
 }
@@ -86,18 +86,9 @@ window#waybar.chromium {
     border-top: 1px solid;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
 #clock {
-    background-color: #64727D;
+     color: #64727D;
+     border: 1px #64727D solid;
 }
 
 #battery {
@@ -149,11 +140,13 @@ label:focus {
 }
 
 #network {
-    background-color: #2980b9;
+     border: 1px #2980b9 solid;
+     color: #2980b9;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+     border: 1px #f53c3c solid;
+     color: #f53c3c;
 }
 
 #pulseaudio {
@@ -219,7 +212,6 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
-    min-width: 16px;
+    color: #00b093;
+    border: 1px #00b093 solid;
 }

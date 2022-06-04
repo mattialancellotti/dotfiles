@@ -1,6 +1,6 @@
 {
     "height": 30, // Waybar height (to be removed for auto height)
-    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "position": "top", // Waybar position (top|bottom|left|right)
     // "layer": "top", // Waybar at top layer
     //"width": 100, // Waybar width
     "margin-top": 5,
@@ -9,15 +9,14 @@
     "margin-bottom": 5,
 
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "backlight", "sway/language", "clock", "tray"],
+    "modules-left": ["mpd", "sway/mode"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["network", "sway/language", "clock", "tray"],
 
     // Modules configuration
     "sway/workspaces": {
-        "disable-scroll": true,
         "all-outputs": true,
-        "format": "{name}",
+        "format": "{icon}",
         "format-icons": {
             "1": "",
             "2": "",
@@ -27,10 +26,22 @@
             "urgent": "",
             "focused": "",
             "default": ""
+        },
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
         }
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/language": {
+        "format": "{}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+        "tooltip": false
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
@@ -113,11 +124,12 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-wifi": "{essid} ",
+        "format-ethernet": "{ifname} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        // "format-alt": "{ifname}",
+        "tooltip": false
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
