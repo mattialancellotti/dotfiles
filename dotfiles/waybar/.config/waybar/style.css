@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Droid Sans;
+    font-family: JetBrains Mono;
     font-size: 12px;
     min-height: 0;
 }
@@ -34,7 +34,7 @@ window#waybar.chromium {
 }
 
 /* General layout for the modules in the center */
-.modules-center {
+.modules-center, .modules-right {
      padding: 5px;
      border-radius: 5px;
      background-color: rgba(43, 48, 59, 0.5);
@@ -50,15 +50,21 @@ window#waybar.chromium {
     color: red;
 }
 
-.modules-right {
+.modules-left {
      padding: 5px;
      border-radius: 5px;
-     background-color: rgba(43, 48, 59, 0.5);
+     background-color: transparent;
 }
 
 #mode {
+    background-color: transparent;
+    border: 1px red solid;
+    color: red;
+}
+
+#keyboard-state {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border: 3px solid #ffffff;
 }
 
 #clock,
@@ -78,7 +84,6 @@ window#waybar.chromium {
 #mpd {
     padding: 0 10px;
     margin: 1px 1px 1px 1px;
-    color: #ffffff;
     border-radius: 2px;
 }
 
@@ -159,20 +164,6 @@ label:focus {
     color: #2a5c45;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
-}
-
 #temperature {
     background-color: #f0932b;
 }
@@ -183,32 +174,6 @@ label:focus {
 
 #tray {
     background-color: #2980b9;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
 }
 
 #language {
