@@ -35,7 +35,8 @@ include ~/.config/sway/config.d/01-bindings
 include ~/.config/sway/config.d/02-output
 include ~/.config/sway/config.d/03-appearance
 include ~/.config/sway/config.d/04-modes
-#include ~/.config/sway/config.d/05-bar
+include ~/.config/sway/config.d/05-bar
+include ~/.config/sway/config.d/06-input
 
 exec gentoo-pipewire-launcher
-exec yambar
+#exec yambar
