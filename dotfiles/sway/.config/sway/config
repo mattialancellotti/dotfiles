@@ -39,4 +39,4 @@ include ~/.config/sway/config.d/05-bar
 include ~/.config/sway/config.d/06-input
 
 exec gentoo-pipewire-launcher
-#exec yambar
+exec mako
