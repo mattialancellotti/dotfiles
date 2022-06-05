@@ -41,10 +41,17 @@
         "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
         "tooltip": false
     },
-    "tray": { "spacing": 10 },
+    "tray": {
+         "spacing": 10
+    },
     "keyboard-state": {
+        "interval": 1,
         "capslock": true,
-        "format": "{name}"
+        "format": "{icon}",
+        "format-icons": {
+             "locked": "Caps. Locked",
+             "unlocked": ""
+        }
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",

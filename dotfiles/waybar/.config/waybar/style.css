@@ -58,13 +58,24 @@ window#waybar.chromium {
 
 #mode {
     background-color: transparent;
-    border: 1px red solid;
+    border: 1px solid red;
+    padding: 0 10px;
+    border-radius: 9px;
+    margin: 1px 1px 1px 1px;
     color: red;
 }
 
-#keyboard-state {
-    background-color: #64727D;
-    border: 3px solid #ffffff;
+#keyboard-state, #keboard-state label {
+    background-color: transparent;
+}
+
+#keyboard-state label.locked {
+    background-color: transparent;
+    border: 1px solid yellow;
+    padding: 0 10px;
+    border-radius: 9px;
+    margin: 1px 1px 1px 1px;
+    color: yellow;
 }
 
 #clock,
@@ -78,7 +89,6 @@ window#waybar.chromium {
 #pulseaudio,
 #custom-media,
 #tray,
-#mode,
 #language,
 #idle_inhibitor,
 #mpd {
