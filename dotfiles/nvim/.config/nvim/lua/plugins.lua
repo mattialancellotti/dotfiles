@@ -20,7 +20,8 @@ return require('packer').startup({function()
    use { 'sainnhe/everforest' }
    use { 'cocopon/iceberg.vim' }
    use { 'arcticicestudio/nord-vim' }
-   use { 'sainnhe/gruvbox-material' }
+   --use { 'sainnhe/gruvbox-material' }
+   use { 'ellisonleao/gruvbox.nvim' }
    use { 'haystackandroid/cosmic_latte' }
    use { 'frenzyexists/aquarium-vim' }
    use { 'catppuccin/nvim' }

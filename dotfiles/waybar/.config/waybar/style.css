@@ -1,3 +1,5 @@
+@import "/home/mattia/.themes/Gruvbox-Dark/gtk-3.0/gtk-dark.css";
+
 * {
     border: none;
     border-radius: 0;
@@ -8,76 +10,25 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0);
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
-    border-radius: 5px;
-    border: 2px;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-window#waybar.empty {
-    background-color: transparent;
-}
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
+     background-color: transparent;
 }
 
 /* General layout for the modules in the center */
-.modules-center, .modules-right {
-     padding: 5px;
+.modules-center, .modules-right, .modules-left {
+     padding: 3px;
      border-radius: 5px;
-     background-color: rgba(43, 48, 59, 0.5);
+     background-color: #282828;
 }
 
 #workspaces button {
      padding: 4px 4px 4px 4px;
-     color: white;
+     color: #EBDBB2;
 }
 
-#workspaces button.focused {
-    background-color: transparent;
-    color: red;
-}
 
-.modules-left {
-     padding: 5px;
-     border-radius: 5px;
-     background-color: transparent;
-}
 
-#mode {
-    background-color: transparent;
-    border: 1px solid red;
-    padding: 0 10px;
-    border-radius: 9px;
-    margin: 1px 1px 1px 1px;
-    color: red;
-}
-
-#keyboard-state, #keboard-state label {
-    background-color: transparent;
-}
-
-#keyboard-state label.locked {
-    background-color: transparent;
-    border: 1px solid yellow;
-    padding: 0 10px;
-    border-radius: 9px;
-    margin: 1px 1px 1px 1px;
-    color: yellow;
-}
-
+#keyboard-state label,
+#mode,
 #clock,
 #battery,
 #cpu,
@@ -86,8 +37,6 @@ window#waybar.chromium {
 #temperature,
 #backlight,
 #network,
-#pulseaudio,
-#custom-media,
 #tray,
 #language,
 #idle_inhibitor,
@@ -97,13 +46,34 @@ window#waybar.chromium {
     border-radius: 2px;
 }
 
+#mode label {
+    background-color: transparent;
+    border: 1px solid red;
+    padding: 0 10px;
+    border-radius: 9px;
+    margin: 1px 1px 1px 1px;
+    color: red;
+}
+
+#keyboard-state label {
+    background-color: transparent;
+    border: 1px solid rgba(88, 99, 84, 0.5);
+    color: rgba(88, 99, 84, 0.5);
+}
+
+#keyboard-state label.locked {
+    background-color: transparent;
+    border: 1px solid #B16286;
+    color: #B16286;
+}
+
 #window {
     border-top: 1px solid;
 }
 
 #clock {
-     color: #64727D;
-     border: 1px #64727D solid;
+     color: #928374;
+     border: 1px #928374 solid;
 }
 
 #battery {
@@ -155,23 +125,13 @@ label:focus {
 }
 
 #network {
-     border: 1px #2980b9 solid;
-     color: #2980b9;
+     border: 1px #D79921 solid;
+     color: #D79921;
 }
 
 #network.disconnected {
      border: 1px #f53c3c solid;
      color: #f53c3c;
-}
-
-#pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
-}
-
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
 }
 
 #temperature {
@@ -187,6 +147,6 @@ label:focus {
 }
 
 #language {
-    color: #00b093;
-    border: 1px #00b093 solid;
+    color: #98971A;
+    border: 1px #98971A solid;
 }

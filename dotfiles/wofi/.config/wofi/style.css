@@ -1,26 +1,30 @@
+@import "/home/mattia/.themes/Gruvbox-Dark/gtk-3.0/gtk-dark.css";
+
+/*
 #window {
      margin: 0px;
      border: 0px;
      border-radius: 5px;
-     background-color: #0C0E14;
+     background-color: transparent;
 }
 
 #outer-box {
      margin: 0px;
      border-radius: 5px;
-     background-color: #0C0E14;
+     background-color: transparent;
 }
 
 #input {
      margin: 5px;
+     border-radius: 5px;
      color: white;
-     background-color: #0C0E14;
+     background-color: rgba(43, 48, 59, 0.9);
 }
 
 #inner-box {
      margin: 5px;
      border: none;
-     background-color: #0C0E14;
+     background-color: rgba(43, 48, 59, 0.9);
 }
 
 #text {
@@ -33,3 +37,4 @@
      border-radius: 5px;
      background-color: #0C0E14;
 }
+*/

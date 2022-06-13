@@ -16,11 +16,6 @@
         "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -28,9 +23,7 @@
         "persistent_workspaces": {
             "1": [],
             "2": [],
-            "3": [],
-            "4": [],
-            "5": []
+            "3": []
         }
     },
     "sway/mode": {
@@ -50,7 +43,7 @@
         "format": "{icon}",
         "format-icons": {
              "locked": "Caps. Locked",
-             "unlocked": ""
+             "unlocked": "Caps. Locked"
         }
     },
     "clock": {

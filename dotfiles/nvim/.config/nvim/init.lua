@@ -52,7 +52,7 @@ require('plugins')
 vim.notify = require('notify')
 
 --  Color scheme
-cmd 'colorscheme catppuccin'
+cmd 'colorscheme gruvbox'
 
 -- Loading mappings
 local map = require('config').map
