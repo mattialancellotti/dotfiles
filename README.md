@@ -11,20 +11,14 @@ works, the Makefile is basically just comments and explainations I'd suggest you
 read it.
 
 ### Programs
-+ [Alacritty](https://alacritty.org)
-+ [Foot](https://codeberg.org/dnkl/foot)
-+ [FontConfig](https://www.freedesktop.org/wiki/Software/fontconfig/)
-+ [Hikari](https://hikari.acmelabs.space)
-+ [MPV](https://mpv.io)
-+ [Neofetch](https://github.com/dylanaraps/neofetch)
-+ [Neovim](https://neovim.io)
-+ [PipeWire](https://pipewire.org)
-+ [GNU Screen](https://www.gnu.org/software/screen/manual/screen.html)
-+ [Sway](https://swaywm.org)
-+ [Tmux](https://github.com/tmux/tmux)
-+ [Waybar](https://github.com/Alexays/Waybar)
-+ [Wofi](https://hg.sr.ht/~scoopta/wofi)
-+ [Yambar](https://codeberg.org/dnkl/yambar)
+Category | Programs
+--- | ----
+Core System  | [FontConfig](https://www.freedesktop.org/wiki/Software/fontconfig/), [PipeWire](https://pipewire.org)
+Terminals | [Alacritty](https://alacritty.org), [Foot](https://codeberg.org/dnkl/foot)
+Waland Desktop | [Hikari](https://hikari.acmelabs.space), [Sway](https://swaywm.org), [Yambar](https://codeberg.org/dnkl/yambar), [Wofi](https://hg.sr.ht/~scoopta/wofi), [Waybar](https://github.com/Alexays/Waybar)
+Terminal Multiplexers | [Tmux](https://github.com/tmux/tmux), [GNU Screen](https://www.gnu.org/software/screen/manual/screen.html)
+Editors | [Neovim](https://neovim.io)
+Useful Programs | [Neofetch](https://github.com/dylanaraps/neofetch), [MPV](https://mpv.io)
 
 ### Configuration
 To automatically manage my dotfiles in a safe way I wrote a makefile that uses
