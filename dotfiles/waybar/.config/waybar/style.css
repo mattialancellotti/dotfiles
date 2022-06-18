@@ -25,7 +25,10 @@ window#waybar {
      color: #EBDBB2;
 }
 
-
+#workspaces button.focused {
+     padding: 4px 4px 4px 4px;
+     color: #FE8019;
+}
 
 #keyboard-state label,
 #mode,
