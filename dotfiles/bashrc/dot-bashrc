@@ -21,7 +21,7 @@ export MAILDIR="$HOME/.local/share/mails"
 export GOPATH="$HOME/.local/share/go"
 export UTILITIES="$HOME/code/utilities/tools"
 export SCREENRC="$HOME/.config/screen/screenrc"
-#export GDK_BACKEND=wayland
+export MOZ_ENABLE_WAYLAND=1
 #export QT_QPA_PLATFORM=wayland
 
 # Adding local dotfiles
