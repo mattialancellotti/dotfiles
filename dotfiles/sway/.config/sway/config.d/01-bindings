@@ -14,6 +14,9 @@
     # Changing language
     bindsym Alt+Space exec swaymsg input "type:keyboard" xkb_switch_layout next
 
+    # Locking screen
+    bindsym Alt+L exec swaylock
+
     # Screenshot utility
     bindsym Alt+p exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/screenshot_$(date +"%Y%m%d")_$(date +"%Hh%Mm%Ss").png
     bindsym Alt+Shift+p exec grim -g "$(slurp)" - | wl-copy

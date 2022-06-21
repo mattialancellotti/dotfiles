@@ -1,0 +1,12 @@
+image=~/pictures/wallpapers/sway.jpg
+layout-border-color=FFFFFF00
+ring-color=FE8019
+key-hl-color=AF3A03
+
+# "Wrong Password" colors
+inside-wrong-color=CC241D
+line-wrong-color=9D0006
+
+# "Verifying" colors
+inside-ver-color=B16286
+ring-ver-color=8F3F71
