@@ -17,6 +17,12 @@ fi
 #MANPAGER="less -w -R -I --use-color -Dd+g -Du+y -DSwr"
 MANPAGER="nvim +Man!"
 
+# XDG specific variables
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME-"$HOME/.local/state"
+
 export MAILDIR="$HOME/.local/share/mails"
 export GOPATH="$HOME/.local/share/go"
 export UTILITIES="$HOME/code/utilities/tools"
