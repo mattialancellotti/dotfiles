@@ -21,14 +21,23 @@ MANPAGER="nvim +Man!"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME-"$HOME/.local/state"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 export MAILDIR="$HOME/.local/share/mails"
-export GOPATH="$HOME/.local/share/go"
 export UTILITIES="$HOME/code/utilities/tools"
-export SCREENRC="$HOME/.config/screen/screenrc"
 export MOZ_ENABLE_WAYLAND=1
 #export QT_QPA_PLATFORM=wayland
+
+# Programs' specific directories
+export SCREENRC="$HOME/.config/screen/screenrc"
+export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
+export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
+export ANDROID_HOME="${XDG_DATA_HOME}/android"
+export HISTFILE="${XDG_STATE_HOME}/bash/history"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export GOPATH="${XDG_DATA_HOME}/go"
+export PARALLEL_HOME="${XDG_CONFIG_HOME}/parallel"
+export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # Adding local dotfiles
 PATH=$PATH:${HOME}/.local/bin
@@ -36,8 +45,8 @@ PATH=$PATH:${HOME}/.local/bin
 export PS1="\[\033[04;36m\]\u\[\033[00;37m\] [\t · \j]— [\w]: "
 export EDITOR=nvim
 
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 alias n=nnn
-#alias imv=mpv
 alias vim=nvim
 alias vi=view
 alias ls="ls --color=auto"

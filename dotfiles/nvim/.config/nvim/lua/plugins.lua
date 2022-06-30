@@ -40,6 +40,10 @@ return require('packer').startup({function()
       requires = {{ 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' }}
    }
 
+   -- Nvim-lsp:
+   --    Configurations for Nvim LSP
+   use { 'neovim/nvim-lspconfig' }
+
    -- Fugitive
    --    The best vim plugin for using git from the editor. Compatible with
    --    Neovim too. Apparently it's called Fugitive because it's so good that
