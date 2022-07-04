@@ -18,10 +18,10 @@ fi
 MANPAGER="nvim +Man!"
 
 # XDG specific variables
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
+export readonly XDG_CONFIG_HOME="$HOME/.config"
+export readonly XDG_CACHE_HOME="$HOME/.cache"
+export readonly XDG_DATA_HOME="$HOME/.local/share"
+export readonly XDG_STATE_HOME="$HOME/.local/state"
 
 export MAILDIR="$HOME/.local/share/mails"
 export UTILITIES="$HOME/code/utilities/tools"
@@ -29,15 +29,15 @@ export MOZ_ENABLE_WAYLAND=1
 #export QT_QPA_PLATFORM=wayland
 
 # Programs' specific directories
-export SCREENRC="$HOME/.config/screen/screenrc"
-export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
-export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
-export ANDROID_HOME="${XDG_DATA_HOME}/android"
-export HISTFILE="${XDG_STATE_HOME}/bash/history"
-export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
-export GOPATH="${XDG_DATA_HOME}/go"
-export PARALLEL_HOME="${XDG_CONFIG_HOME}/parallel"
-export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
+export readonly SCREENRC="$HOME/.config/screen/screenrc"
+export readonly XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
+export readonly XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
+export readonly ANDROID_HOME="${XDG_DATA_HOME}/android"
+export readonly HISTFILE="${XDG_STATE_HOME}/bash/history"
+export readonly GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export readonly GOPATH="${XDG_DATA_HOME}/go"
+export readonly PARALLEL_HOME="${XDG_CONFIG_HOME}/parallel"
+export readonly LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # Adding local dotfiles
 PATH=$PATH:${HOME}/.local/bin
@@ -53,15 +53,3 @@ alias ls="ls --color=auto"
 alias lr="ls --color=auto -R"
 
 set checkwinsize
-
-BORG_MAN_PAGES=(
-  "borg" "borg-common" "borg-create" "borg-init" "borg-info" "borg-prune"
-  "borg-mount" "borg-extract" "borg-list" "borg-delete" "borg-recreate"
-  "borg-check" "borg-diff" "borg-upgrade" "borg-rename"
-);
-
-info-manuals() {
-  man $(echo -e $(echo "$@" | sed 's/\ /\\n/g') | fzf)
-}
-
-alias mborg="info-manuals ${BORG_MAN_PAGES[*]}"
