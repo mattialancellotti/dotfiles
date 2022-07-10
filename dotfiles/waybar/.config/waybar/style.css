@@ -43,6 +43,7 @@ window#waybar {
 #tray,
 #language,
 #idle_inhibitor,
+#custom-bluetooth,
 #mpd {
     padding: 0 10px;
     margin: 1px 1px 1px 1px;
@@ -152,4 +153,9 @@ label:focus {
 #language {
     color: #98971A;
     border: 1px #98971A solid;
+}
+
+#custom-bluetooth {
+    color: #83A598;
+    border: 1px #83A598 solid;
 }
