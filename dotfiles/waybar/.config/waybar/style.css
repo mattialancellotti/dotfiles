@@ -33,17 +33,12 @@ window#waybar {
 #keyboard-state label,
 #mode,
 #clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
 #network,
 #tray,
 #language,
 #idle_inhibitor,
 #custom-bluetooth,
+#bluetooth,
 #mpd {
     padding: 0 10px;
     margin: 1px 1px 1px 1px;
@@ -80,16 +75,6 @@ window#waybar {
      border: 1px #928374 solid;
 }
 
-#battery {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
 @keyframes blink {
     to {
         background-color: #ffffff;
@@ -97,35 +82,8 @@ window#waybar {
     }
 }
 
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
 label:focus {
     background-color: #000000;
-}
-
-#cpu {
-    background-color: #2ecc71;
-    color: #000000;
-}
-
-#memory {
-    background-color: #9b59b6;
-}
-
-#disk {
-    background-color: #964B00;
-}
-
-#backlight {
-    background-color: #90b1b1;
 }
 
 #network {
@@ -138,14 +96,6 @@ label:focus {
      color: #f53c3c;
 }
 
-#temperature {
-    background-color: #f0932b;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
-
 #tray {
     background-color: #2980b9;
 }
@@ -155,7 +105,17 @@ label:focus {
     border: 1px #98971A solid;
 }
 
-#custom-bluetooth {
+#custom-bluetooth.off {
+    border: 1px solid rgba(88, 99, 84, 0.5);
+    color: rgba(88, 99, 84, 0.5);
+}
+
+#custom-bluetooth.on {
     color: #83A598;
     border: 1px #83A598 solid;
+}
+
+#bluetooth {
+    color: #458588;
+    border: 1px #458588 solid;
 }

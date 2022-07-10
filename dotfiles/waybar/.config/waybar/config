@@ -7,9 +7,9 @@
     "margin-bottom": 5,
 
     // Choose the order of the modules
-    "modules-left": ["keyboard-state", "sway/mode"],
+    "modules-left": ["keyboard-state", "custom/bluetooth", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["custom/bluetooth", "network", "sway/language", "clock", "tray"],
+    "modules-right": [ "network", "clock", "sway/language", "bluetooth", "tray"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -50,28 +50,6 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ",
@@ -104,5 +82,14 @@
          "exec": "$HOME/.config/waybar/scripts/bluecheck.sh 2> /dev/null",
          "interval": 10,
          "return-type": "json"
+    },
+    "bluetooth": {
+         "format": ": {num_connections}",
+	 "format-connected": ": {num_connections}",
+	 "format-connected-battery": ": {num_connections}",
+	 "tooltip-format": "{controller_alias}\t{controller_address}",
+	 "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+	 "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	 "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
     }
 }
