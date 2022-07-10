@@ -1,0 +1,14 @@
+configuration {
+  location: 2;
+  steal-focus: true;
+  sidebar-mode:  true;
+  hide-scrollbar: true;
+  kb-cancel: "Escape,Control+bracketleft";
+  monitor: "-1";
+
+  /* Rofi modus */
+  modi: "drun,ssh";
+  show: "drun";
+}
+
+@theme "gruvbox-dark-custom.rasi"
