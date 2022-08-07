@@ -47,16 +47,16 @@ opt.showmode = false
 -- Loading plugins
 require('plugins')
 
+-- Luckily Neovim comes with most (if not all) of the optional features already
+-- built in, therefore there is no need to check for feature availability.
+require('user/autocmds')         -- Loading neovim autocmds
+require('user/mappings')         -- neovim key mappings
+
 -- Using notify plugin as notification manager
 vim.notify = require('notify')
 
 --  Color scheme
 cmd 'colorscheme gruvbox'
 
--- As far as I know most of this configuration is tied to NeoVim that comes with
--- all features enabled by default, therefore checking for autocmd feature is
--- useless.
-require('user/autocmds')
-require('user/mappings')         -- neovim key mappings
 require('user/nvim-tree')        -- nvim-tree configuration
 require('user/nvim-treesitter')  -- nvim-treesitter configuration
