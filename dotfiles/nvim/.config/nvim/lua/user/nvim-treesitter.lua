@@ -1,8 +1,9 @@
 require('nvim-treesitter.configs').setup({
    -- Ensuring some languages are installed
    ensure_installed = {
-      "c", "cpp", "dockerfile", "lua", "go", "gomod", "yaml", "json",
-      "html", "latex", "python", "vim", "comment", "make"
+      "c", "cpp", "dockerfile", "lua", "go", "scheme", "yaml", "json",
+      "html", "latex", "python", "vim", "comment", "make", "c_sharp",
+      "markdown", "bash"
    },
    -- Configuring highlighting for all modules
    highlight = {

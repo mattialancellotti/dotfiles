@@ -16,13 +16,10 @@ return require('packer').startup({function()
    -- My hundreds of colorschemes
    use { 'sainnhe/edge' }
    use { 'rafamadriz/neon' }
-   use { 'embark-theme/vim' }
    use { 'sainnhe/everforest' }
    use { 'cocopon/iceberg.vim' }
    use { 'arcticicestudio/nord-vim' }
-   --use { 'sainnhe/gruvbox-material' }
    use { 'ellisonleao/gruvbox.nvim' }
-   use { 'haystackandroid/cosmic_latte' }
    use { 'frenzyexists/aquarium-vim' }
    use { 'catppuccin/nvim' }
 
