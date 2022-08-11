@@ -40,7 +40,7 @@ export readonly PARALLEL_HOME="${XDG_CONFIG_HOME}/parallel"
 export readonly LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # Adding local dotfiles
-PATH=$PATH:${HOME}/.local/bin
+PATH=$PATH:${HOME}/.local/bin:${HOME}/dotnet/.tools
 
 export PS1="\[\033[04;36m\]\u\[\033[00;37m\] [\t · \j]— [\w]: "
 export EDITOR=nvim
