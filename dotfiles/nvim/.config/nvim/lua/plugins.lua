@@ -39,7 +39,8 @@ return packer.startup(function(use)
    use { 'cocopon/iceberg.vim', disable = true }
    use { 'arcticicestudio/nord-vim', disable = true }
    use { 'frenzyexists/aquarium-vim', disable = true }
-   use { 'ellisonleao/gruvbox.nvim' }
+   use { 'ellisonleao/gruvbox.nvim', disable = true }
+   use { 'savq/melange' }
 
    -- Galaxy theme for status line
    use { 'itchyny/lightline.vim' }
