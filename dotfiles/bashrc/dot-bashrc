@@ -39,6 +39,8 @@ export readonly GOPATH="${XDG_DATA_HOME}/go"
 export readonly PARALLEL_HOME="${XDG_CONFIG_HOME}/parallel"
 export readonly LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 export readonly SQLITE_HISTORY="${XDG_CACHE_HOME}/sqlite_history"
+export readonly TEXMFVAR="${XDG_CACHE_HOME}/texlive/texmf-var"
+export readonly PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 
 # Adding local dotfiles
 PATH=$PATH:${HOME}/.local/bin:${HOME}/dotnet/.tools
