@@ -1,10 +1,8 @@
-@import "/home/mattia/.themes/Gruvbox-Dark/gtk-3.0/gtk-dark.css";
-
 * {
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: JetBrains Mono;
+    font-family: IBM Plex;
     font-size: 12px;
     min-height: 0;
 }
