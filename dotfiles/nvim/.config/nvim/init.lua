@@ -59,3 +59,4 @@ vim.notify = require('notify')
 
 require('user/nvim-tree')        -- nvim-tree configuration
 require('user/nvim-treesitter')  -- nvim-treesitter configuration
+require('user/nvim-indent')      -- nvim-indentline configuration

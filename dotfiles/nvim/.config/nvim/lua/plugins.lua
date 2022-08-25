@@ -84,6 +84,8 @@ return packer.startup(function(use)
    --    version.
    use { 'nvim-treesitter/nvim-treesitter', run = "TSUpdate" }
 
+   use { 'lukas-reineke/indent-blankline.nvim' }
+
    if packer_bootstrap then
       require('packer').sync()
    end
