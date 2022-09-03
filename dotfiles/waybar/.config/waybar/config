@@ -27,7 +27,7 @@
         }
     },
     "sway/mode": {
-        "format": "<span style=\"normal\">{}</span>"
+        "format": "&#8689;{}"
     },
     "sway/language": {
         "format": "{}",
