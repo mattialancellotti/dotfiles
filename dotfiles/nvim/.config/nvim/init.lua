@@ -49,10 +49,9 @@ require('plugins')
 
 -- Luckily Neovim comes with most (if not all) of the optional features already
 -- built in, therefore there is no need to check for feature availability.
-require('user/autocmds')         -- Loading neovim autocmds
-require('user/mappings')         -- neovim key mappings
+require('core/autocmds')         -- Loading neovim autocmds
+require('core/mappings')         -- neovim key mappings
 require('core/colorscheme')      -- Setting colorscheme
-
 
 -- Using notify plugin as notification manager
 vim.notify = require('notify')
