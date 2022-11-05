@@ -14,7 +14,7 @@ api.nvim_create_autocmd("FileType", {
 -- Bash Standards from ttps://lug.fh-swf.de/vim/vim-bash/StyleGuideShell.en.pdf
 api.nvim_create_autocmd("FileType", {
    group = "filetype",
-   pattern = "sh",
+   pattern = {"sh", "lua"},
    command = "setl shiftwidth=2 softtabstop=2 expandtab",
 })
 
