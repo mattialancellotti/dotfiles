@@ -22,10 +22,6 @@ DOTFILES = $(foreach pkg,$(wildcard dotfiles/*),$(shell basename $(pkg)))
 #     appear installed, in this case my dotfiles gets installed in 2 locations:
 #     	- Home directory (as `HOMEDIR`);
 #     	- Config directory defined by XDG standard (as `CONFDIR`).
-# 
-# P.S. The fact that there are 2 different target directory (`STOWDIR` and
-# `HOMEDIR`) shouldn't be happening, but it's a way of solving a bug that
-# doesn't get fixed in stow and that is not applying --dotfiles to directories.
 STOWDIR = dotfiles
 prefix = $(HOME)
 
