@@ -1,6 +1,5 @@
 require('nvim-tree').setup({
    disable_netrw = true,         -- Disabling the default file browser
-   open_on_setup = true,         -- Opening nvim-tree if current buf is empty
    hijack_cursor = true,         -- Keep cursor on first letter
    view = {
       mappings = {
@@ -18,7 +17,7 @@ require('nvim-tree').setup({
          -- Do not show icons for files and git events
          show = {
             file = false,
-            git = false
+            git = true
          },
 
          -- Since I can't figure out how to install and configure a font on
