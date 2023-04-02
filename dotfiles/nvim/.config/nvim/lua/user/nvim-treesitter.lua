@@ -14,5 +14,3 @@ require('nvim-treesitter.configs').setup({
    -- Disabling indentation
    indent = { enable = false }
 })
-
-vim.notify('Treesitter configuration loaded.')
