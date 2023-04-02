@@ -1,0 +1,15 @@
+[user]
+     name = "Mattia Lancellotti"
+     email = "lancellottimattia@pm.me"
+
+[init]
+     defaultBranch = main
+
+[core]
+     filemode = false
+
+[fetch]
+     prune = true
+
+[status]
+     short = true
