@@ -32,14 +32,9 @@ return packer.startup(function(use)
    use { 'wbthomason/packer.nvim' }
 
    -- My hundreds of colorschemes
-   use { 'sainnhe/edge', disable = true }
-   use { 'catppuccin/nvim', disable = true }
-   use { 'rafamadriz/neon', disable = true }
-   use { 'sainnhe/everforest', disable = true }
-   use { 'cocopon/iceberg.vim', disable = true }
-   use { 'arcticicestudio/nord-vim', disable = true }
-   use { 'frenzyexists/aquarium-vim', disable = true }
-   use { 'ellisonleao/gruvbox.nvim', disable = true }
+   use { 'sainnhe/edge' }
+   use { 'catppuccin/nvim' }
+   use { 'ellisonleao/gruvbox.nvim' }
    use { 'savq/melange' }
 
    -- Galaxy theme for status line
@@ -82,7 +77,13 @@ return packer.startup(function(use)
    --    Neovim plugin that improves highlighting, indentation and some other
    --    thing. As far as I know it will be integrated in neovim in a future
    --    version.
-   use { 'nvim-treesitter/nvim-treesitter', run = "TSUpdate" }
+   use {
+     'nvim-treesitter/nvim-treesitter',
+     run = function()
+       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+       ts_update()
+     end,
+   }
 
    use { 'lukas-reineke/indent-blankline.nvim' }
 
