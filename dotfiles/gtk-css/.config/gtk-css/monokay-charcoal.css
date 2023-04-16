@@ -1,0 +1,20 @@
+@define-color main-background #000000;
+@define-color main-foreground #FFFFFF;
+
+@define-color normal-black #1A1A1A;
+@define-color normal-red #F4005F;
+@define-color normal-green #98E024;
+@define-color normal-yellow #FA8419;
+@define-color normal-blue #9D65FF;
+@define-color normal-magenta #F4005F;
+@define-color normal-cyan #58D1EB;
+@define-color normal-white #C4C5B5;
+
+@define-color bright-black #625E4C;
+@define-color bright-red #F4005F;
+@define-color bright-green #98E024;
+@define-color bright-yellow #E0D561;
+@define-color bright-blue #9D65FF;
+@define-color bright-magenta #F4005F;
+@define-color bright-cyan #58D1EB;
+@define-color bright-white #F6F6EF;

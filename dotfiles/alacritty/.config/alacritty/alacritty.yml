@@ -8,8 +8,8 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-#import:
-#  - /path/to/alacritty.yml
+import:
+  - ~/.local/share/alacritty-theme/themes/monokai_charcoal.yaml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -46,8 +46,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 10
-    y: 10
+    x: 5
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -176,11 +176,11 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
-colors:
+#colors:
   # Default colors
-  primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+  #primary:
+  #  foreground: '#ECE1D7'
+  #  background: '#292522'
 
     # Bright and dim foreground colors
     #
@@ -249,26 +249,26 @@ colors:
   #  background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '#1d1f21'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
+  # normal:
+  #  black:   '#34302C'
+  #  red:     '#BD8183'
+  #  green:   '#78997A'
+  #  yellow:  '#E49B5D'
+  #  blue:    '#7F91B2'
+  #  magenta: '#B380B0'
+  #  cyan:    '#7B9695'
+  #  white:   '#C1A78E'
 
   # Bright colors
-  bright:
-    black:   '#666666'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0b1'
-    white:   '#eaeaea'
+  # bright:
+  #  black:   '#867462'
+  #  red:     '#D47766'
+  #  green:   '#85B695'
+  #  yellow:  '#EBC06D'
+  #  blue:    '#A3A9CE'
+  #  magenta: '#CF9BC2'
+  #  cyan:    '#89B3B6'
+  #  white:   '#ECE1D7'
 
   # Dim colors
   #
