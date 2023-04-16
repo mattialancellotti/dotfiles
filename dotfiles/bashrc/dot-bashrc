@@ -26,6 +26,7 @@ export readonly XDG_STATE_HOME="$HOME/.local/state"
 export MAILDIR="$HOME/.local/share/mails"
 export UTILITIES="$HOME/code/utilities/tools"
 export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORMTHEME=gtk3
 #export QT_QPA_PLATFORM=wayland
 
 # Programs' specific directories
@@ -54,5 +55,6 @@ alias vi=view
 alias ls="ls --color=auto"
 alias lr="ls --color=auto -R"
 alias sway="dbus-run-session sway"
+alias neofetch="neofetch --off"
 
 set checkwinsize
