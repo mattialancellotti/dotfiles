@@ -1,5 +1,5 @@
 # Setting some properties for the output
 output HDMI-A-2 {
     resolution 1920x1080
-    background ~/pictures/wallpapers/sway.png fill
+    background ~/pictures/wallpapers/pixel_night.jpg fill
 }

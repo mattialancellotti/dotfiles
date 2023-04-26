@@ -38,5 +38,10 @@ include ~/.config/sway/config.d/04-modes
 include ~/.config/sway/config.d/05-bar
 include ~/.config/sway/config.d/06-input
 
-exec gentoo-pipewire-launcher
+# Disabling because i'm not on gentoo anymore
+#exec gentoo-pipewire-launcher
 exec mako
+
+# Importing environment variable $WAYLAND_DISPLAY needed by the
+# xdg-desktop-portal-wlr service
+exec systemctl --user import-environment WAYLAND_DISPLAY
