@@ -1,10 +1,7 @@
+@import 'theme/catppuccin/mocha.css';
+
 * {
-    border: none;
-    border-radius: 0;
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: IBM Plex;
-    font-size: 12px;
-    min-height: 0;
+     font-family: "JetBrains Mono", "Font Awesome 6 Free";
 }
 
 window#waybar {
@@ -12,107 +9,68 @@ window#waybar {
 }
 
 /* General layout for the modules in the center */
-.modules-center, .modules-right, .modules-left {
-     padding: 3px;
+.modules-center,
+.modules-right,
+.modules-left {
+     background-color: @crust;
      border-radius: 5px;
-     background-color: #282828;
 }
 
 #workspaces button {
-     padding: 4px 4px 4px 4px;
-     color: #EBDBB2;
+     color: @blue;
+     padding: 0px 5px 0px 5px;
 }
 
 #workspaces button.focused {
-     padding: 4px 4px 4px 4px;
-     color: #FE8019;
+     color: @peach;
+}
+
+#clock {
+    color: @subtext1;
 }
 
 #keyboard-state label,
 #mode,
-#clock,
 #network,
 #tray,
 #language,
 #idle_inhibitor,
 #custom-bluetooth,
 #bluetooth,
+#clock,
 #mpd {
-    padding: 0 10px;
-    margin: 1px 1px 1px 1px;
-    border-radius: 2px;
+     font-size: 12px;
+     padding: 0 5px;
+     margin: 1px 1px 1px 1px;
+     border-radius: 2px;
 }
 
 #mode {
-    background-color: transparent;
-    border: 1px solid red;
-    padding: 0 10px;
-    margin: 1px 1px 1px 1px;
-    color: #CC241D;
-}
-
-#keyboard-state label {
-    background-color: transparent;
-    border: 1px solid rgba(88, 99, 84, 0.5);
-    color: rgba(88, 99, 84, 0.5);
-}
-
-#keyboard-state label.locked {
-    background-color: transparent;
-    border: 1px solid #B16286;
-    color: #B16286;
-}
-
-#window {
-    border-top: 1px solid;
-}
-
-#clock {
-     color: #928374;
-     border: 1px #928374 solid;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-label:focus {
-    background-color: #000000;
+     font-weight: bold;
+     background: @normal-red;
+     color: @main-foreground;
 }
 
 #network {
-     border: 1px #D79921 solid;
-     color: #D79921;
+     color: @green;
 }
 
 #network.disconnected {
-     border: 1px #f53c3c solid;
-     color: #f53c3c;
-}
-
-#tray {
-    background-color: #2980b9;
+     color: @red;
 }
 
 #language {
-    color: #98971A;
-    border: 1px #98971A solid;
-}
-
-#custom-bluetooth.off {
-    border: 1px solid rgba(88, 99, 84, 0.5);
-    color: rgba(88, 99, 84, 0.5);
-}
-
-#custom-bluetooth.on {
-    color: #83A598;
-    border: 1px #83A598 solid;
+     color: @mauve;
 }
 
 #bluetooth {
-    color: #458588;
-    border: 1px #458588 solid;
+     color: @sky;
+}
+
+#bluetooth.disabled {
+     color: @red;
+}
+
+#bluetooth.off {
+     color: @red;
 }
