@@ -1,7 +1,8 @@
 width=350
 height=300
 location=2
-mode=drun
+mode=run
+prompt=Search program
 
 key_down=Control_L-n
 key_up=Control_L-p

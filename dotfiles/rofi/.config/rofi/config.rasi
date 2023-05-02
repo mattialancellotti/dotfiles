@@ -6,9 +6,13 @@ configuration {
   kb-cancel: "Escape,Control+bracketleft";
   monitor: "-1";
 
+  drun {
+    parse-user: true;
+  }
+
   /* Rofi modus */
-  modi: "drun,ssh";
+  modi: "drun,ssh,run";
   show: "drun";
 }
 
-@theme "gruvbox-dark-custom.rasi"
+@theme "rounded-minimal-catppuccin-mocha.rasi"

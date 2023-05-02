@@ -1,7 +1,8 @@
-@import "/home/mattia/.local/share/themes/Gruvbox-Dark/gtk-3.0/gtk-dark.css";
+@import "/home/mattia/.config/gtk_css/common_themes/dark_melange.css";
 
 #window {
-     border: 1px solid #EBDBB2;
+     border: 0.5px solid @bright-black;
+     background: @main-background;
      border-radius: 5px;
 }
 
@@ -13,14 +14,34 @@
 
 #input {
      margin: 5px;
-     border-radius: 5px;
-     color: #BDAE93;
-}
-#entry:selected {
-     border: none;
-     background-color: rgba(43, 48, 59, 0.9);
+     color: @main-foreground;
+     box-shadow: none;
+     background: transparent;
+     border-style: none none solid none;
+     border-color: @normal-red;
+     border-radius: 0px;
+     font-family: Iosevka;
 }
 
+#entry {
+     background-color: transparent;
+     border-style: none none none solid;
+     border-left-width: 5px;
+     border-left-color: @bright-black;
+}
+
+#entry:selected {
+     outline: 0px;
+     color: @normal-red;
+     border-style: none none none solid;
+     border-left-width: 5px;
+     border-left-color: @normal-red;
+}
+
+label:selected {
+     outline: 0px;
+     color: @normal-red;
+}
 
 #inner-box {
      border-radius: 5px;
