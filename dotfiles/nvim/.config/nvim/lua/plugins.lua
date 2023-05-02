@@ -32,10 +32,10 @@ return packer.startup(function(use)
    use { 'wbthomason/packer.nvim' }
 
    -- My hundreds of colorschemes
-   use { 'sainnhe/edge' }
    use { 'catppuccin/nvim' }
    use { 'ellisonleao/gruvbox.nvim' }
    use { 'savq/melange' }
+   use { 'rebelot/kanagawa.nvim' }
 
    -- Galaxy theme for status line
    use { 'itchyny/lightline.vim' }

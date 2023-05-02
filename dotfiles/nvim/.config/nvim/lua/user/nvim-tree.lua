@@ -18,7 +18,7 @@ require('nvim-tree').setup({
             file = true,
             git = true
          },
-         webdev_colors = false
+         webdev_colors = true
       },
 
       -- List of special files to highlight
