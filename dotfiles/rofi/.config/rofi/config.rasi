@@ -15,4 +15,4 @@ configuration {
   show: "drun";
 }
 
-@theme "rounded-minimal-catppuccin-mocha.rasi"
+@theme "neutral.rasi"

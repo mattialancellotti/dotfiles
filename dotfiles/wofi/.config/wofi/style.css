@@ -1,7 +1,4 @@
-@import "/home/mattia/.config/gtk_css/common_themes/dark_melange.css";
-
 #window {
-     border: 0.5px solid @bright-black;
      background: @main-background;
      border-radius: 5px;
 }
