@@ -8,8 +8,8 @@
 
     // Choose the order of the modules
     "modules-left": ["sway/workspaces"],
-    "modules-center": [],
-    "modules-right": ["wireplumber", "network", "bluetooth", "sway/mode","clock", "sway/language"],
+    "modules-center": ["clock"],
+    "modules-right": ["wireplumber", "network", "bluetooth", "sway/mode", "sway/language"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -46,9 +46,9 @@
         }
     },
     "clock": {
-        "format": "{:%a %d %b %H.%m}",
+        "format": "{:%a %d %b %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "interval": 50,
+        "interval": 1,
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface

@@ -24,6 +24,12 @@ window#waybar {
      color: white;
 }
 
+#workspaces button:hover {
+     color: white;
+     background: transparent;
+     border: 1px solid transparent;
+}
+
 #keyboard-state label,
 #mode,
 #network,
@@ -39,7 +45,7 @@ window#waybar {
 }
 
 #mode {
-     color: white;;
+     color: white;
 }
 
 #network,
