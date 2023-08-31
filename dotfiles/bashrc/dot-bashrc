@@ -15,7 +15,7 @@ fi
 
 # Put your fun stuff here.
 #MANPAGER="less -w -R -I --use-color -Dd+g -Du+y -DSwr"
-MANPAGER="nvim -u NORC +Man!"
+export MANPAGER="nvim +Man!"
 
 # XDG specific variables
 export readonly XDG_CONFIG_HOME="$HOME/.config"

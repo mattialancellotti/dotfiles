@@ -3,7 +3,7 @@
      email = "lancellottimattia@protonmail.com"
 
 [init]
-     defaultBranch = main
+     defaultBranch = master
 
 [core]
      filemode = false

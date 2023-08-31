@@ -1,5 +1,6 @@
 * {
-     font-family: "JetBrains Mono", "Font Awesome 6 Free";
+     /* This requires the 'awesome-terminal-font' package in Arch Linux */
+     font-family: "IBM Plex Mono", "octicons";
 }
 
 window#waybar {
