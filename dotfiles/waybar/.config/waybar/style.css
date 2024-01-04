@@ -1,11 +1,11 @@
 * {
      /* This requires the 'awesome-terminal-font' package in Arch Linux */
-     font-family: "IBM Plex Mono", "octicons";
+     font-family: "RobotoMono Nerd Font", "octicons";
 }
 
 window#waybar {
-     background-color: rgba(0, 0, 0, 0.7);
-     border-radius:0 0 3 3;
+     background-color: black;
+     border-radius:0 0 5 5;
 }
 
 /* General layout for the modules in the center */
@@ -45,8 +45,12 @@ window#waybar {
      color: white;
 }
 
-#mode {
-     color: white;
+#mode,
+#language {
+     color: black;
+     margin: 4px;
+     border-radius: 5px;
+     background: rgba(255, 255, 255, 0.85);
 }
 
 #network,

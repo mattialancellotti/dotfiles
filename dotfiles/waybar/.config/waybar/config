@@ -14,7 +14,7 @@
     // Modules configuration
     "sway/workspaces": {
         "all-outputs": true,
-        "format": "<span font_family='Nerd Font'>{icon}</span>",
+        "format": "{icon}",
         "format-icons": {
             "default": "",
         },
@@ -26,10 +26,10 @@
         }
     },
     "sway/mode": {
-        "format": "({})"
+        "format": "{}"
     },
     "sway/language": {
-        "format": "({})",
+        "format": "{}",
         "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
         "tooltip": false
     },
@@ -39,20 +39,20 @@
     "keyboard-state": {
         "interval": 1,
         "capslock": true,
-        "format": "{icon}",
+        "format": "{}",
         "format-icons": {
              "locked": "Caps. Locked",
-             "unlocked": "Caps. Locked"
+             "unlocked": "Caps. Unlocked"
         }
     },
     "clock": {
-        "format": "{:%a %d %b %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%a %d %b @ %H:%M}",
+        "tooltip-format": "{calendar}",
         "interval": 1,
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "",
+        "format-wifi": "<span color='LightSkyBlue'></span>",
         "format-ethernet": "",
         "format-linked": " (No IP)",
         "format-disconnected": "⚠ Disconnected",
@@ -79,7 +79,7 @@
         // "on-click": "pavucontrol"
     },
     "bluetooth": {
-         "format": "",
+         "format": "<span color='DodgerBlue'></span>",
          "format-disabled": "",
          "format-off": "",
 	 "format-connected": "",
@@ -90,7 +90,7 @@
 	 "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
     },
     "wireplumber": {
-         "format": "{volume}%",
+         "format": "<span color='GoldenRod'></span> {volume}%",
          "on-click": "helvum",
     }
 }
