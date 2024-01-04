@@ -1,0 +1,53 @@
+live_config_reload = true
+shell = "/bin/bash"
+
+[window]
+dynamic_title = true
+
+padding.x = 5
+padding.y = 1
+
+class.general = "Alacritty"
+class.instance = "Alacritty"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 10.0
+
+normal.family = "monospace"
+normal.style = "Regular"
+
+bold.family = "monospace"
+bold.style = "bold"
+
+bold_italic.family = "monospace"
+bold_italic.style = "Bold Italic"
+
+italic.family = "monospace"
+italic.style = "Italic"
+
+[keyboard]
+bindings = [
+     { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+     { key = "NumpadAdd", mods = "Control", action = "IncreaseFontSize" },
+     { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+     { key = "NumpadSubtract", mods = "Control", action = "DecreaseFontSize" },
+     { key = "Copy", action = "Copy" },
+     { key = "Paste", action = "Paste" }
+]
+
+[mouse]
+bindings = [
+     { mouse = "Middle", action = "PasteSelection" },
+]
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+binding = { key = "U", mods = "Control|Shift" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
