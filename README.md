@@ -34,7 +34,3 @@ some examples you can try to better understand this functionality:
 + This will unstow neovim's configuration `make uninstall programs="nvim"`.
 
 If you want to distribute your dotfiles once you've modified them, you can run `make dist`.
-
-### Current setup
-![Setup image](/doc/setup.png)
-![NeoVim](/doc/neovim.png)
